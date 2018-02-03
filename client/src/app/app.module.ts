@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavComponent } from './components/nav/nav.component';
 import { SearchSectionComponent } from './components/search-section/search-section.component';
+import { LoginComponent } from './components/login/login.component';
+import {RegisterComponent} from './components/register/register.component';
+import {routes} from './app.route';
 
 
 @NgModule({
@@ -13,10 +16,13 @@ import { SearchSectionComponent } from './components/search-section/search-secti
     AppComponent,
     HeaderComponent,
     NavComponent,
-    SearchSectionComponent
+    SearchSectionComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    routes
   ],
   providers: [],
   bootstrap: [AppComponent]
