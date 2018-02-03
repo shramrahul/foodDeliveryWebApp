@@ -9,6 +9,9 @@ import { SearchSectionComponent } from './components/search-section/search-secti
 import { LoginComponent } from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {routes} from './app.route';
+import { IntroSectionComponent } from './components/intro-section/intro-section.component';
+import { NewsAndEventsSectionComponent } from './components/news-and-events-section/news-and-events-section.component';
+import { WelcomeSectionComponent } from './components/welcome-section/welcome-section.component';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import {routes} from './app.route';
     NavComponent,
     SearchSectionComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    IntroSectionComponent,
+    NewsAndEventsSectionComponent,
+    WelcomeSectionComponent
   ],
   imports: [
     BrowserModule,
