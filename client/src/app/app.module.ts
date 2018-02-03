@@ -12,6 +12,8 @@ import {routes} from './app.route';
 import { IntroSectionComponent } from './components/intro-section/intro-section.component';
 import { NewsAndEventsSectionComponent } from './components/news-and-events-section/news-and-events-section.component';
 import { WelcomeSectionComponent } from './components/welcome-section/welcome-section.component';
+import { DownloadAppSectionComponent } from './components/download-app-section/download-app-section.component';
+import { FooterSectionComponent } from './components/footer-section/footer-section.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { WelcomeSectionComponent } from './components/welcome-section/welcome-se
     LoginComponent,
     IntroSectionComponent,
     NewsAndEventsSectionComponent,
-    WelcomeSectionComponent
+    WelcomeSectionComponent,
+    DownloadAppSectionComponent,
+    FooterSectionComponent
   ],
   imports: [
     BrowserModule,
