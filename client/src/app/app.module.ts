@@ -14,6 +14,9 @@ import { NewsAndEventsSectionComponent } from './components/news-and-events-sect
 import { WelcomeSectionComponent } from './components/welcome-section/welcome-section.component';
 import { DownloadAppSectionComponent } from './components/download-app-section/download-app-section.component';
 import { FooterSectionComponent } from './components/footer-section/footer-section.component';
+import { RestaurantsSectionComponent } from './components/restaurants-section/restaurants-section.component';
+import { RestaurantHomeSectionComponent } from './components/restaurant-home-section/restaurant-home-section.component';
+import { HomeBodySectionComponent } from './components/home-body-section/home-body-section.component';
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import { FooterSectionComponent } from './components/footer-section/footer-secti
     NewsAndEventsSectionComponent,
     WelcomeSectionComponent,
     DownloadAppSectionComponent,
-    FooterSectionComponent
+    FooterSectionComponent,
+    RestaurantsSectionComponent,
+    RestaurantHomeSectionComponent,
+    HomeBodySectionComponent
   ],
   imports: [
     BrowserModule,
