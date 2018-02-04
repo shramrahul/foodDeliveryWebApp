@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+// var passport = require('passport');
+var jwt = require('jsonwebtoken');
+// var passport =require('../config/passport')(passport);
 
 var UserSchema = new mongoose.Schema({
   email: {
@@ -37,7 +40,11 @@ UserSchema.statics.authenticate = function (email, password, callback) {
       }
       bcrypt.compare(password, user.password, function (err, result) {
         if (result === true) {
-          return callback(null, user);
+            var token = jwt.sign(user, config.secret, {
+                expiresIn: 10080 // in seconds
+            });
+
+          return callback(null, user , token);
         } else {
           return callback();
         }

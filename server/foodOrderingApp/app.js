@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
+
 //connect to MongoDB
 mongoose.connect('mongodb://localhost/foodOrderingApp');
 var db = mongoose.connection;
