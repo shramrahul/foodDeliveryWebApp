@@ -14,10 +14,14 @@ import { NewsAndEventsSectionComponent } from './components/news-and-events-sect
 import { WelcomeSectionComponent } from './components/welcome-section/welcome-section.component';
 import { DownloadAppSectionComponent } from './components/download-app-section/download-app-section.component';
 import { FooterSectionComponent } from './components/footer-section/footer-section.component';
+
 import { RestaurantsSectionComponent } from './components/restaurants-section/restaurants-section.component';
 import { RestaurantHomeSectionComponent } from './components/restaurant-home-section/restaurant-home-section.component';
 import { HomeBodySectionComponent } from './components/home-body-section/home-body-section.component';
 import { UserDashboardSectionComponent } from './components/user-dashboard-section/user-dashboard-section.component';
+
+import {ReactiveFormsModule} from '@angular/forms';
+
 
 
 @NgModule({
@@ -40,7 +44,8 @@ import { UserDashboardSectionComponent } from './components/user-dashboard-secti
   ],
   imports: [
     BrowserModule,
-    routes
+    routes,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
