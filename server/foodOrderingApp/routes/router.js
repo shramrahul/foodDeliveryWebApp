@@ -59,16 +59,16 @@ router.post('/register', function (req, res, next) {
 
 router.post('/login', function (req, res, next) {
     if (req.body.logemail && req.body.logpassword) {
-        User.authenticate(req.body.logemail, req.body.logpassword, function (error, user, token) {
+        User.authenticate(req.body.logemail, req.body.logpassword, function (error, user) {
             if (error || !user) {
                 var err = new Error('Wrong email or password.');
                 err.status = 401;
                 return next(err);
             } else {
                 req.session.userId = user._id;
-                console.log("Token"+token);
+                // console.log("Token"+token);
 
-                return res.redirect('/profile');
+                return res.send({"name": user._id})//res.redirect('/profile');
             }
         });
     }

@@ -40,11 +40,11 @@ UserSchema.statics.authenticate = function (email, password, callback) {
       }
       bcrypt.compare(password, user.password, function (err, result) {
         if (result === true) {
-            var token = jwt.sign(user, config.secret, {
-                expiresIn: 10080 // in seconds
-            });
+            // var token = jwt.sign(user, config.secret, {
+            //     expiresIn: 10080 // in seconds
+            // });
 
-          return callback(null, user , token);
+          return callback(null, user );
         } else {
           return callback();
         }
