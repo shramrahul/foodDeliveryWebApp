@@ -72,15 +72,15 @@ export class RestaurantHomeSectionComponent implements OnInit {
 
 
   onReviewPost(){
-      const rev={
-        "user_id":"567",
-        "restaurant_id":"9876",
-        "review":this.textReview,
-        date: new Date()
+      // const rev={
+      //   "user_id":"567",
+      //   "restaurant_id":"9876",
+      //   "review":this.textReview,
+      //   date: new Date()
 
-      }
-      this.reviews.push(rev);
-      console.log(this.reviews)
+      // }
+      // this.reviews.push(rev);
+      // console.log(this.reviews)
   }
 
 }
