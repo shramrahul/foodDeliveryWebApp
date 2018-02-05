@@ -5,10 +5,14 @@ import {HttpClient} from '@angular/common/http';
 export class UtilService {
 
   public loginUrl: string ="http://localhost:8080/login";
-  registerUrl: string="";
+  registerUrl: string="http://localhost:8080/register";
   constructor(public http: HttpClient) { }
 
   public getLoginUrl(){
     return this.loginUrl;
   }
+  public getRegisterUrl(){
+    return this.registerUrl;
+  }
+
 }
