@@ -10,7 +10,7 @@
     <div class="pull-left-lg pull-left-md list-box-info ">
       <h5 class="list-box-info-title"><a href="#">{{res.name}}</a></h5>
       <ul class="list-unstyled list-inline list-box-info-tags" >
-        <li *ngFor="let food of res.foods">{{food}}</li>
+        <li *ngFor="let food of res.foods"><i class="fa fa-utensils-alt"></i>{{food.name}}, </li>
         
       </ul>
       <ul class="list-unstyled list-inline list-box-info-description text-bold">
@@ -41,17 +41,15 @@
         <li><a href="#" class="badge animation"><i class="fa fa-heart"></i> 10</a></li>
       </ul>
       <h6 class="sub-title"><i class="fa fa-certificate"></i> Flat 10% Off</h6>
-      <a href="#" class="btn btn-secondary animation">
+      <button (click)="onCLick(res)" [routerLink]="['restaurant-home']" class="btn btn-secondary animation">
         Details <i class="fa fa-chevron-right"></i>
-      </a>
+      </button>
     </div>
   <!-- List Right Col Ends -->
   </div>
 <!-- List #1 Ends -->
-
-
   </div>
 
- 
-
 </div>
+
+<router-outlet></router-outlet>

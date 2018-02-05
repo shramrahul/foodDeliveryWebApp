@@ -18,23 +18,26 @@ router.get('/', function (req, res, next) {
 //POST route for updating data
 router.post('/register', function (req, res, next) {
     // confirm that user typed same password twice
-    if (req.body.password !== req.body.passwordConf) {
-        var err = new Error('Passwords do not match.');
-        err.status = 400;
-        // res.send("passwords do not match");
-        return res.status(400).send({auth:false,token:null,message: "passwords do not match"});
-    }
+    // if (req.body.password !== req.body.passwordConf) {
+    //     var err = new Error('Passwords do not match.');
+    //     err.status = 400;
+    //     // res.send("passwords do not match");
+    //     return res.status(400).send({auth:false,token:null,message: "passwords do not match"});
+    // }
 
     if (req.body.email &&
         req.body.username &&
         req.body.password &&
-        req.body.passwordConf) {
+        req.body.state && req.body.city && req.body.street && req.body.zipcode ) {
 
         var userData = {
-            email: req.body.email,
-            username: req.body.username,
-            password: req.body.password,
-            passwordConf: req.body.passwordConf,
+            credentials:{email: req.body.email, username: req.body.username, password: req.body.password},
+            address: {street:req.body.street, city: req.body.city, state: req.body.state, zipcode: req.body.zipcode},
+
+            // state: req.body.state,
+            // city: req.body.city,
+            // street: req.body.street,
+            // zipcode: req.body.zipcode
         }
 
         User.create(userData, function (error, user) {
@@ -76,14 +79,14 @@ router.post('/login', function (req, res, next) {
                 return res.status(401).send({auth:false,token:null});
             } else {
                 req.session.userId = user._id;
-                return res.status(200).send({"name": user._id, "token": token})//res.redirect('/profile');
+                return res.status(200).send({"user_id": user._id, "token": token,})//res.redirect('/profile');
             }
         });
     }
 })
 
 // GET route after registering
-router.get('/profile',VerifyToken, function (req, res, next) {
+router.get('/dashboard',VerifyToken, function (req, res, next) {
     User.findById(req.session.userId)
         .exec(function (error, user) {
             if (error) {
@@ -94,7 +97,8 @@ router.get('/profile',VerifyToken, function (req, res, next) {
                     err.status = 400;
                     return next(err);
                 } else {
-                    return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+                    return res.send({"user_id":user._id,"email": user.email}) ;
+                    // res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
                 }
             }
         });

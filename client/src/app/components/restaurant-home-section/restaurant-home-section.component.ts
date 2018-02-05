@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RestaurantServiceService } from '../../services/restaurant/restaurant-service.service';
+import { UserServiceService } from '../../services/user/user-service.service';
 
 @Component({
   selector: 'app-restaurant-home-section',
@@ -6,18 +8,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./restaurant-home-section.component.css']
 })
 export class RestaurantHomeSectionComponent implements OnInit {
+  
+  private restaurant;
+  private user: any;
   cart=[];
   total:number;
   deliveryCharge: number=5;
   reviews :Array<{}>=[]
   textReview:string=' i am a boy and i liked it ';
  
-  constructor() {
+  constructor( private restaurantService: RestaurantServiceService,
+            private userService :UserServiceService ) {
+
     this.cart=[]; 
     this.total=5;
+    
+    
 
     this.reviews=[
-      {"user_id":"123", 
+      {"user":"123", 
         "restaurant_id":"23456", 
         "review":"this is the best resurant ever seen in the town",
         "date":"10/10/2017"
@@ -33,31 +42,23 @@ export class RestaurantHomeSectionComponent implements OnInit {
 
  
 
-  foods=[
-    {  id: 1001, cuisine:"Italy", name:"Pizza", price: 15},
-    {  id: 1002, cuisine:"Nepal", name:"Mo:No", price: 15},
-    {  id: 1003, cuisine:"India", name:"tofu", price: 15},
-    {  id: 1004, cuisine:"America", name:"Pickle", price: 15}
-  ]
+  
 
 
   
 
-  addToCart(id){
-      for(var food of this.foods){
-        if(id===food.id) {
+  addToCart(food){
+    console.log("adding in cart"+food)
             setTimeout(() => {
               this.cart.push(food);
               this.total+=food.price;
             }, 500);
-      }
-      }
   }
 
   
-  removeFromCart(id){
+  removeFromCart(f){
     for(var food of this.cart){
-      if(id==food.id) {
+      if(f.id==food.id) {
         setTimeout(() => {
           this.cart.splice(this.cart.indexOf(food),1);
               this.total-=food.price; 
@@ -67,20 +68,53 @@ export class RestaurantHomeSectionComponent implements OnInit {
     }
   }
 
+
+
   ngOnInit() {
+    this.restaurantService.pushedData.subscribe(data=> this.restaurant=data );
+    this.restaurantService.getRestaurant();
+    
+    this.userService.pushedData.subscribe(data=> this.user= data);
+    this.userService.getUser();
   }
 
 
   onReviewPost(){
-      // const rev={
-      //   "user_id":"567",
-      //   "restaurant_id":"9876",
-      //   "review":this.textReview,
-      //   date: new Date()
+      const rev={
+        "user_id":this.user.name,
+        "restaurant_id":this.restaurant.name,
+        "review":this.textReview,
+        date: new Date()
 
-      // }
-      // this.reviews.push(rev);
-      // console.log(this.reviews)
+      }
+
+      setTimeout(() => {
+        
+        this.reviews.push(rev);
+        console.log(this.reviews)
+      }, 1000);
+      
+  }
+
+  onCheckout(){
+
+   
+    console.log("before adding order"+this.user.food_ordered)
+
+    for (var order of this.cart){
+
+      var food_ordered={
+        date : Date.now(),
+        food: order,
+        restaurant_used: this.restaurant.name
+       
+      }
+
+      this.user.food_ordered.push(food_ordered);
+    }
+    
+      this.userService.pushData(this.user);
+      console.log("after adding order"+this.user.food_ordered)
   }
 
 }

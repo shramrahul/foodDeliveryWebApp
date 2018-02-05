@@ -1,6 +1,6 @@
 <div class = "container main-container">
   <h3 class="main-heading-1 text-center-sm text-center-xs">
-   Hyderabad Special Food Dabha, Begumpet
+   {{restaurant.name}}
   </h3>
 
 
@@ -36,13 +36,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let food of foods">
+                <tr *ngFor="let food of restaurant.foods">
                   <th scope="row">{{food.id}}</th>
                   <td>{{food.name}}</td>
                   <td>{{food.cuisine}}</td>
                   <td>{{food.price}}</td>
                   <td>
-                      <button  class="btn btn-info btn-md" (click)="addToCart(food.id)">
+                      <button  class="btn btn-info btn-md" (click)="addToCart(food)">
                           <span class="glyphicon glyphicon-shopping-cart"></span> Order
                         </button>
                   </td>
@@ -68,7 +68,7 @@
                       <span class="pull-left">{{item.name}}</span>
                       <span class="pull-center text-spl-color pull-right">${{item.price}}</span>
                   
-                        <button  class="btn btn-danger btn-sm pull-right" (click)="removeFromCart(item.id)">
+                        <button  class="btn btn-danger btn-sm pull-right" (click)="removeFromCart(item)">
                           <span class=" glyphicon glyphicon-remove-circle "></span> remove
                         </button>
                       
@@ -87,7 +87,8 @@
                     <dd class="text-bold text-spl-color text-right">${{total}}</dd>
                   </dl>
                 <!-- Order Item Total Ends -->
-                  <button class=" btn btn-success btn-large ">Checkout</button>
+                  <button class=" btn btn-success btn-large" 
+                              (click)="onCheckout()" [routerLink]="['profile']">Checkout</button>
                 </div>
               <!-- Order Content Ends -->
               </div>
@@ -162,36 +163,7 @@
                       </div>
                     </div>
                   <!-- Review #1 Ends -->
-<<<<<<< HEAD
-
-
-
-                  
-=======
-                  <!-- Review #2 Starts -->
-                    <div class="review-list">
-                      <div class="clearfix">
-                        <div class="pull-left">
-                          <h6><i class="fa fa-calendar"></i> Mar 10, 2016</h6>
-                          <h6>By Sainath Chillapuram</h6>
-                          <ul class="list-unstyled list-inline rating-star-list">
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                          </ul>
-                        </div>
-                        <img src="images/review-thumb-img1.png" alt="Image" class="img-responsive pull-right">
-                      </div>
-                      <div class="review-list-content">
-                        <p>The delivery guy said he will be back in 10 mins with the missing items, but never came back. when I called the restaurant, they took another 30 mins to deliver.</p>
-                      </div>
-                    </div>
-                  <!-- Review #2 Ends -->
-
->>>>>>> 9a5e1c73f29dec00d1ffbf378b4adfaa3cf5fc6b
-                <!-- Reviews List Ends -->
+ <!-- Reviews List Ends -->
 
 
                 <!-- Spacer Starts -->
@@ -206,3 +178,5 @@
 
 </div>
 
+
+<router-outlet></router-outlet>

@@ -25,6 +25,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthenticationService} from './services/authentication.service';
 import {HttpModule} from '@angular/http';
+import { RestaurantServiceService } from './services/restaurant/restaurant-service.service';
+import { UserServiceService } from './services/user/user-service.service';
 
 
 @NgModule({
@@ -54,7 +56,12 @@ import {HttpModule} from '@angular/http';
     FormsModule
   ],
  
-  providers: [UtilService,AuthenticationService,DbServiceService ],
+  providers: [UtilService,
+    AuthenticationService,
+    DbServiceService, 
+    RestaurantServiceService, 
+    UserServiceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
