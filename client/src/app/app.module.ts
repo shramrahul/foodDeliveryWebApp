@@ -21,6 +21,8 @@ import { UserDashboardSectionComponent } from './components/user-dashboard-secti
 import {UtilService} from './services/util.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {AuthenticationService} from './services/authentication.service';
+import {HttpModule} from '@angular/http';
 
 
 @NgModule({
@@ -45,10 +47,11 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     routes,
     HttpClientModule,
+    HttpModule,
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [UtilService],
+  providers: [UtilService,AuthenticationService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
