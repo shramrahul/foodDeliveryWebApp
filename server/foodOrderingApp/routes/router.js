@@ -67,6 +67,7 @@ router.post('/register', function (req, res, next) {
 })
 
 router.post('/login', function (req, res, next) {
+    console.log("inside login")
     if (req.body.logemail && req.body.logpassword) {
         User.authenticate(req.body.logemail, req.body.logpassword, function (error, user, token) {
             if (error || !user) {

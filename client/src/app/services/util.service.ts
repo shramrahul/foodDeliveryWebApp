@@ -4,8 +4,11 @@ import {HttpClient} from '@angular/common/http';
 @Injectable()
 export class UtilService {
 
-  loginUrl: string ="";
+  public loginUrl: string ="http://localhost:8080/login";
   registerUrl: string="";
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
+  public getLoginUrl(){
+    return this.loginUrl;
+  }
 }
