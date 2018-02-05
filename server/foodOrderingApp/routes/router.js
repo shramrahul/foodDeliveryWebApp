@@ -1,7 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var VerifyToken = require('../auth/VerifyToken');
+var bodyParser = require('body-parser');
+var jwt = require('jsonwebtoken');
+var config = require('../config')
 
+router.use(bodyParser.urlencoded({extended: false}));
+router.use(bodyParser.json());
 
 // GET route for reading data
 router.get('/', function (req, res, next) {
@@ -15,8 +21,8 @@ router.post('/register', function (req, res, next) {
     if (req.body.password !== req.body.passwordConf) {
         var err = new Error('Passwords do not match.');
         err.status = 400;
-        res.send("passwords do not match");
-        return next(err);
+        // res.send("passwords do not match");
+        return res.status(400).send({auth:false,token:null,message: "passwords do not match"});
     }
 
     if (req.body.email &&
@@ -35,8 +41,11 @@ router.post('/register', function (req, res, next) {
             if (error) {
                 return next(error);
             } else {
-                req.session.userId = user._id;
-                return res.redirect('/profile');
+                var token = jwt.sign({ id: user._id }, config.secret, {
+                    expiresIn: 10080 // in seconds
+                });
+               // req.session.userId = user._id;
+                return res.status(200).send({auth:true, token: token});
             }
         });
     // }else if (req.body.logemail && req.body.logpassword) {
@@ -59,23 +68,21 @@ router.post('/register', function (req, res, next) {
 
 router.post('/login', function (req, res, next) {
     if (req.body.logemail && req.body.logpassword) {
-        User.authenticate(req.body.logemail, req.body.logpassword, function (error, user) {
+        User.authenticate(req.body.logemail, req.body.logpassword, function (error, user, token) {
             if (error || !user) {
-                var err = new Error('Wrong email or password.');
-                err.status = 401;
-                return next(err);
+                // var err = new Error('Wrong email or password.');
+                // err.status = 401;
+                return res.status(401).send({auth:false,token:null});
             } else {
                 req.session.userId = user._id;
-                // console.log("Token"+token);
-
-                return res.send({"name": user._id})//res.redirect('/profile');
+                return res.status(200).send({"name": user._id, "token": token})//res.redirect('/profile');
             }
         });
     }
 })
 
 // GET route after registering
-router.get('/profile', function (req, res, next) {
+router.get('/profile',VerifyToken, function (req, res, next) {
     User.findById(req.session.userId)
         .exec(function (error, user) {
             if (error) {
@@ -101,7 +108,9 @@ router.get('/logout', function (req, res, next) {
                 console.log("hello"+ err);
                 return next(err);
             } else {
-                return res.redirect('/');
+
+                // return res.redirect('/');
+                return res.send({auth:false, token: null})
             }
         });
     }

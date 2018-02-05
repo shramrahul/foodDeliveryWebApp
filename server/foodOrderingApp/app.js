@@ -7,13 +7,14 @@ var MongoStore = require('connect-mongo')(session);
 
 
 //connect to MongoDB
-mongoose.connect('mongodb://localhost/foodOrderingApp');
+mongoose.connect('mongodb://suman:suman@ds125068.mlab.com:25068/food_ordering_app_db');
 var db = mongoose.connection;
 
 //handle mongo error
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
     // we're connected!
+    console.log("we re connected");
 });
 
 //use sessions for tracking logins
