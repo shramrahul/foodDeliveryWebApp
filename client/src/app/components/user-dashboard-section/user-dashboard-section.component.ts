@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserServiceService } from '../../services/user/user-service.service';
 
 @Component({
   selector: 'app-user-dashboard-section',
@@ -7,64 +8,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDashboardSectionComponent implements OnInit {
  
-   totalCost ;
+   totalCost:number;
+   totalOrders: number;
   
-  user={
-    id: 1,	
-    name:{
-      firstname: "shreeram",
-      lastname: "chaulagain"
-      },
-    address:{
-      building:"1000N",
-      street:"4th Street",
-      district:"fairfield",
-      zipcode: "",
-      coord:[
-        {lati:123.23,
-        long:12.2345}
-        ]
-      },
-    credentials:{
-      username: "shramshram",
-      password: "shamshram",
-      email:	"shreeamchaulagain@gmai.com"
-      },
+   user:any;
   
-    food_ordered:[
-            {
-              date:"2017/13/14",
-              food_id: 1,
-              restaurant_id: 12345,
-              cost:"20"						
-            },
-            {
-              date:"2017/13/14",
-              food_id: 2,
-              restaurant_id: 56784,
-              cost:"20"						
-            },
-            {
-              date:"2017/13/14",
-              food_id: 3,
-              restaurant_id: 34567,
-              cost:"20"						
-            }
-        ]
-  
-  }
-  constructor() { }
+  constructor(private userService: UserServiceService) {
+   
+    this.totalCost =0 ;
+    this.totalOrders =0;
+   
+   }
 
   ngOnInit() {
+    
+     this.userService.pushedData.subscribe(data=>this.user=data)
+     this.userService.getUser();
+    
+      //this.user =this.userService.user;
+      console.log(this.user)
     this.getTotalCost();
+   
+  
   }
 
   getTotalCost(){
    
-    for (var cos of this.user.food_ordered){
-      this.totalCost+= parseFloat(cos.cost);
+    
+    for (var cos in this.user.food_ordered){
+      this.totalCost+= (this.user.food_ordered[cos].food.price);
+      this.totalOrders++;
    }
    
   }
+
+
 
 }

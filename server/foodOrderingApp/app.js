@@ -40,17 +40,14 @@ app.use(cors());
 
 // include routes
 var routes = require('./routes/router');
-<<<<<<< HEAD
 var restaurant = require('./routes/restaurant');
 app.use('/',routes);
 app.use('/login', routes);
 app.use('/register',routes);
 app.use('/restaurant',restaurant);
-=======
 app.use(routes);
 //app.use('login', routes);
 //app.use('register',routes);
->>>>>>> 9a5e1c73f29dec00d1ffbf378b4adfaa3cf5fc6b
 
 
 // catch 404 and forward to error handler

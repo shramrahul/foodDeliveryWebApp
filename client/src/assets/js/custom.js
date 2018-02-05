@@ -61,6 +61,6 @@ $(function() {
 		};
 		var map = new google.maps.Map(document.querySelector('.map, .contact-page-map'), mapOptions);
 	}
-	google.maps.event.addDomListener(window, 'load', initialize);
+	
 	
 });

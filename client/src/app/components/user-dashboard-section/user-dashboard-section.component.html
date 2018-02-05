@@ -10,7 +10,7 @@
               <div class="content ">
                   <div class="author">
                     <img alt="..." class="avatar border-white" src="assets/images/face-2.jpg">
-                    <h5 class="title">{{user.name.firstname}} {{user.name.lastname}}<br>
+                    <h5 class="title">{{user.name}}<br>
                        
                     </h5>
                   </div>
@@ -27,10 +27,10 @@
                           <h5>12<br><small>Reviews</small></h5>
                       </div>
                       <div class="col-md-4">
-                          <h5>20<br><small>Orders</small></h5>
+                          <h5>{{totalOrders}}<br><small>Orders</small></h5>
                       </div>
                       <div class="col-md-3">
-                          <h5>{{totalCost}}<br><small>Spent</small></h5>
+                          <h5>${{totalCost}}<br><small>Spent</small></h5>
                       </div>
                   </div>
               </div>
@@ -61,10 +61,10 @@
                       </thead>
                       <tbody>  
                         <tr *ngFor="let rec of user.food_ordered">
-                              <td>{{rec.food_id}}</td>
-                              <td>{{rec.restaurant_id}}</td>
+                              <td>{{rec.food.name}}</td>
+                              <td>{{rec.restaurant_used}}</td>
                               <td>{{rec.date}}</td>
-                              <td>{{rec.cost}}</td>
+                              <td>{{rec.food.price}}</td>
                               
                         </tr>
 
