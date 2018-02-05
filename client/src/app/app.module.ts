@@ -18,6 +18,9 @@ import { RestaurantsSectionComponent } from './components/restaurants-section/re
 import { RestaurantHomeSectionComponent } from './components/restaurant-home-section/restaurant-home-section.component';
 import { HomeBodySectionComponent } from './components/home-body-section/home-body-section.component';
 import { UserDashboardSectionComponent } from './components/user-dashboard-section/user-dashboard-section.component';
+import {UtilService} from './services/util.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -40,9 +43,12 @@ import { UserDashboardSectionComponent } from './components/user-dashboard-secti
   ],
   imports: [
     BrowserModule,
-    routes
+    routes,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [UtilService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
