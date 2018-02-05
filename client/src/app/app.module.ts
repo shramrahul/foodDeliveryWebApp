@@ -20,6 +20,11 @@ import { HomeBodySectionComponent } from './components/home-body-section/home-bo
 import { UserDashboardSectionComponent } from './components/user-dashboard-section/user-dashboard-section.component';
 import { DbServiceService } from './services/db-services/db-service.service';
 
+import {UtilService} from './services/util.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {AuthenticationService} from './services/authentication.service';
+import {HttpModule} from '@angular/http';
 
 
 @NgModule({
@@ -42,9 +47,14 @@ import { DbServiceService } from './services/db-services/db-service.service';
   ],
   imports: [
     BrowserModule,
-    routes
+    routes,
+    HttpClientModule,
+    HttpModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [DbServiceService],
+ 
+  providers: [UtilService,AuthenticationService,DbServiceService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

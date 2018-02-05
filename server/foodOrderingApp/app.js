@@ -4,16 +4,18 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+var cors = require('cors');
 
 
 //connect to MongoDB
-mongoose.connect('mongodb://localhost/foodOrderingApp');
+mongoose.connect('mongodb://suman:suman@ds125068.mlab.com:25068/food_ordering_app_db');
 var db = mongoose.connection;
 
 //handle mongo error
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
     // we're connected!
+    console.log("we re connected");
 });
 
 //use sessions for tracking logins
@@ -34,13 +36,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // serve static files from template
 app.use(express.static(__dirname + '/public'));
 
+app.use(cors());
+
 // include routes
 var routes = require('./routes/router');
+<<<<<<< HEAD
 var restaurant = require('./routes/restaurant');
 app.use('/',routes);
 app.use('/login', routes);
 app.use('/register',routes);
 app.use('/restaurant',restaurant);
+=======
+app.use(routes);
+//app.use('login', routes);
+//app.use('register',routes);
+>>>>>>> 9a5e1c73f29dec00d1ffbf378b4adfaa3cf5fc6b
 
 
 // catch 404 and forward to error handler

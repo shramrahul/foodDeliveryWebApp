@@ -1,60 +1,67 @@
-<div class="modal fade in" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModal" style="display: block; padding-left: 0px;">
+<div class="modal fade in" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModal"
+     style="display: block; padding-left: 0px; overflow: scroll">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content no-boxshadow text-center">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
         <h4 class="modal-title text-spl-color" id="registerModalLabel">Register Here</h4>
       </div>
       <div class="modal-body">
         <!-- Register Form Starts -->
-        <form>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
           <div class="form-group">
-            <label class="sr-only" for="register-fname">First Name</label>
-            <input type="text" class="form-control" id="register-fname" placeholder="First Name">
+            <input type="text" class="form-control" formControlName="userName" placeholder="UserName">
           </div>
-          <div class="form-group">
-            <label class="sr-only" for="register-lname">Last Name</label>
-            <input type="text" class="form-control" id="register-lname" placeholder="Last Name">
+          <div class="err pull-left" *ngIf="!form.controls['userName'].valid">
+            * Required a valid email
           </div>
-          <div class="form-group">
-            <label class="sr-only" for="register-address">Last Name</label>
-            <textarea class="form-control" id="register-address" placeholder="Address" rows="4"></textarea>
-          </div>
-          <div class="form-group">
-            <label class="sr-only" for="register-zipcode">Zip Code</label>
-            <input type="text" class="form-control" id="register-zipcode" placeholder="Zip Code">
-          </div>
-          <div class="form-group">
-            <label class="sr-only" for="register-country">Country</label>
-            <select class="form-control" id="register-country">
-              <option>Country</option>
-              <option>India</option>
-              <option>USA</option>
-              <option>China</option>
-              <option>Australia</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="sr-only" for="register-phoneno">Phone No</label>
-            <input type="text" class="form-control" id="register-phoneno" placeholder="Phone No">
-          </div>
-          <div class="form-group">
-            <label class="sr-only" for="register-email">Email address</label>
-            <input type="email" class="form-control" id="register-email" placeholder="Email">
-          </div>
-          <div class="form-group">
-            <label class="sr-only" for="register-password">Password</label>
-            <input type="password" class="form-control" id="register-password" placeholder="Password">
-          </div>
-          <div class="form-group">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox"> Yes, I would like to receive emails with deals and discount codes
-              </label>
+
+
+            <div class="form-group">
+              <input type="email" class="form-control" id="register-email" formControlName="email" placeholder="Email">
+              <div class="err pull-left" *ngIf="!form.controls['email'].valid">
+                * Required
+              </div>
             </div>
-            <p class="help-block">By logging in I agree to the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.</p>
-          </div>
-          <button type="submit" class="btn btn-lg btn-block btn-tertiary animation">
+
+            <div class="form-group">
+              <input type="password" class="form-control" id="register-password" formControlName="password" placeholder="Password">
+              <div class="err pull-left" *ngIf="!form.controls['password'].valid">
+                * Required
+              </div>
+            </div>
+
+          <!--<form class="form-inline">-->
+            <div class="form-group">
+              <input type="text" class="form-control"  placeholder="State" formControlName="state" name="state">
+              <div class="err pull-left" *ngIf="!form.controls['state'].valid">
+                * Required
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control"  placeholder="City" formControlName="city" name="city">
+              <div class="err pull-left" *ngIf="!form.controls['city'].valid">
+                * Required
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control"  placeholder="Street" formControlName="street" name="street">
+              <div class="err pull-left" *ngIf="!form.controls['street'].valid">
+                * Required
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control"  placeholder="Zip Code" formControlName="zip" name="zip">
+
+              <div class="err pull-left" *ngIf="!form.controls['zip'].valid">
+                * Required
+              </div> </div>
+          <!--</form>-->
+
+
+          <button type="submit" class="btn btn-lg btn-block btn-tertiary animation" style="margin-top:50px">
             Continue To Register <i class="fa fa-caret-right"></i>
           </button>
         </form>

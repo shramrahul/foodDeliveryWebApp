@@ -1,0 +1,9 @@
+.form-inline .form-control {
+  display:inline-block;
+  margin-right:10px;
+  margin-bottom: 10px;
+  float: right;
+}
+.err {
+  color: red
+}
