@@ -10,7 +10,7 @@
               <div class="content ">
                   <div class="author">
                     <img alt="..." class="avatar border-white" src="assets/images/face-2.jpg">
-                    <h5 class="title">Shreeram Chaulagain<br>
+                    <h5 class="title">{{user.name.firstname}} {{user.name.lastname}}<br>
                        
                     </h5>
                   </div>
@@ -30,7 +30,7 @@
                           <h5>20<br><small>Orders</small></h5>
                       </div>
                       <div class="col-md-3">
-                          <h5>24,6$<br><small>Spent</small></h5>
+                          <h5>{{totalCost}}<br><small>Spent</small></h5>
                       </div>
                   </div>
               </div>
@@ -59,20 +59,18 @@
                                     <th>Cost</th>
                           </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                              <td>Pizza</td>
-                              <td>Pizza Raunch</td>
-                              <td>2/12/2016</td>
-                              <td>$12</td>
+                      <tbody>  
+                        <tr *ngFor="let rec of user.food_ordered">
+                              <td>{{rec.food_id}}</td>
+                              <td>{{rec.restaurant_id}}</td>
+                              <td>{{rec.date}}</td>
+                              <td>{{rec.cost}}</td>
+                              
                         </tr>
 
-                        <tr>
-                            <td>Pizza</td>
-                            <td>Pizza Raunch</td>
-                            <td>2/12/2016</td>
-                            <td>$12</td>
-                      </tr>
+                        <!-- <template let-group ngFor [ngForOf]="food_ordered">
+                            <tr *ngFor=" row of group.items">{{row}}</tr>
+                          </template> -->
                          
                       </tbody>
                   </table>

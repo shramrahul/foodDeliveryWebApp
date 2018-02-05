@@ -18,6 +18,8 @@ import { RestaurantsSectionComponent } from './components/restaurants-section/re
 import { RestaurantHomeSectionComponent } from './components/restaurant-home-section/restaurant-home-section.component';
 import { HomeBodySectionComponent } from './components/home-body-section/home-body-section.component';
 import { UserDashboardSectionComponent } from './components/user-dashboard-section/user-dashboard-section.component';
+import { DbServiceService } from './services/db-services/db-service.service';
+
 
 
 @NgModule({
@@ -42,7 +44,7 @@ import { UserDashboardSectionComponent } from './components/user-dashboard-secti
     BrowserModule,
     routes
   ],
-  providers: [],
+  providers: [DbServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

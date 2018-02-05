@@ -36,15 +36,15 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
+                <tr *ngFor="let food of foods">
+                  <th scope="row">{{food.id}}</th>
+                  <td>{{food.name}}</td>
+                  <td>{{food.cuisine}}</td>
+                  <td>{{food.price}}</td>
                   <td>
-                      <a href="" class="btn btn-info btn-md">
+                      <button  class="btn btn-info btn-md" (click)="addToCart(food.id)">
                           <span class="glyphicon glyphicon-shopping-cart"></span> Order
-                        </a>
+                        </button>
                   </td>
                 </tr>
                 
@@ -62,36 +62,32 @@
                 <div class="side-block-order-content">
                 <!-- Order Item List Starts -->
                   <ul class="list-unstyled order-item-list">
-                    <li class="clearfix">
-                      <span class="pull-left">Miryala Rasam</span>
-                      <span class="pull-right text-spl-color">$7.99</span>
+                    
+                    
+                    <li class="clearfix" *ngFor="let item of cart">
+                      <span class="pull-left">{{item.name}}</span>
+                      <span class="pull-center text-spl-color pull-right">${{item.price}}</span>
+                  
+                        <button  class="btn btn-danger btn-sm pull-right" (click)="removeFromCart(item.id)">
+                          <span class=" glyphicon glyphicon-remove-circle "></span> remove
+                        </button>
+                      
                     </li>
-                    <li class="clearfix">
-                      <span class="pull-left">Mokkajonna Shorba</span>
-                      <span class="pull-right text-spl-color">$8.45</span>
-                    </li>
-                    <li class="clearfix">
-                      <span class="pull-left">Miryala Rasam</span>
-                      <span class="pull-right text-spl-color">$7.99</span>
-                    </li>
-                    <li class="clearfix">
-                      <span class="pull-left">Mokkajonna Shorba</span>
-                      <span class="pull-right text-spl-color">$8.45</span>
-                    </li>
+                   
                   </ul>
                 <!-- Order Item List Ends -->
                 <!-- Order Item Total Starts -->
                   <dl class="dl-horizontal order-item-total">
                     <dt class="text-light">Orders Amount :</dt>
-                    <dd class="text-spl-color text-right">$30.45</dd>
+                    <dd class="text-spl-color text-right">${{total}}</dd>
                     <dt class="text-light">Delivery Charges :</dt>
-                    <dd class="text-spl-color text-right">$5.00</dd>
+                    <dd class="text-spl-color text-right">${{deliveryCharge}}</dd>
                     <hr>
                     <dt class="text-bold">Total  Amount :</dt>
-                    <dd class="text-bold text-spl-color text-right">$35.45</dd>
+                    <dd class="text-bold text-spl-color text-right">${{total}}</dd>
                   </dl>
                 <!-- Order Item Total Ends -->
-                  <p class="text-center text-light text-spl-color">Menu List of your Orders</p>
+                  <button class=" btn btn-success btn-large ">Checkout</button>
                 </div>
               <!-- Order Content Ends -->
               </div>
@@ -121,7 +117,10 @@
                   <div class="reviews-form-box">
                     <h6>Write a Review</h6>
                     <form>
-                      <textarea class="form-control" rows="4" placeholder="Message should be atleast 130 charecters"></textarea>
+                      <textarea class="form-control" rows="4" 
+                      placeholder="Message should be atleast 130 charecters">
+
+                      </textarea>
                       <div class="clearfix">
                         <ul class="list-unstyled list-inline rating-star pull-left">
                           <li><i class="fa fa-star"></i></li>
@@ -130,7 +129,7 @@
                           <li><i class="fa fa-star"></i></li>
                           <li><i class="fa fa-star"></i></li>
                         </ul>
-                        <a href="#" class="btn btn-black animation text-uppercase pull-right">Submit</a>
+                        <button (click)="onReviewPost()" class="btn btn-sucess animation text-uppercase pull-right">Submit</button>
                       </div>
                     </form>
                   </div>
@@ -141,13 +140,13 @@
                   <!-- Spacer Ends -->
 
                 <!-- Reviews List Starts -->
-                  <div class="reviews-box">
+                  <div class="reviews-box" *ngFor="let review of reviews">
                   <!-- Review #1 Starts -->
                     <div class="review-list">
                       <div class="clearfix">
                         <div class="pull-left">
-                          <h6><i class="fa fa-calendar"></i> Mar 10, 2016</h6>
-                          <h6>By Sainath Chillapuram</h6>
+                          <h6><i class="fa fa-calendar"></i> {{review.date}}</h6>
+                          <h6>{{review.user_id}}</h6>
                           <ul class="list-unstyled list-inline rating-star-list">
                             <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star"></i></li>
@@ -156,34 +155,16 @@
                             <li><i class="fa fa-star-o"></i></li>
                           </ul>
                         </div>
-                        <img src="images/review-thumb-img1.png" alt="Image" class="img-responsive pull-right">
+                      
                       </div>
                       <div class="review-list-content">
-                        <p>The delivery guy said he will be back in 10 mins with the missing items, but never came back. when I called the restaurant, they took another 30 mins to deliver.</p>
+                        <p>{{review.review}}</p>
                       </div>
                     </div>
                   <!-- Review #1 Ends -->
-                  <!-- Review #2 Starts -->
-                    <div class="review-list">
-                      <div class="clearfix">
-                        <div class="pull-left">
-                          <h6><i class="fa fa-calendar"></i> Mar 10, 2016</h6>
-                          <h6>By Sainath Chillapuram</h6>
-                          <ul class="list-unstyled list-inline rating-star-list">
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                          </ul>
-                        </div>
-                        <img src="images/review-thumb-img1.png" alt="Image" class="img-responsive pull-right">
-                      </div>
-                      <div class="review-list-content">
-                        <p>The delivery guy said he will be back in 10 mins with the missing items, but never came back. when I called the restaurant, they took another 30 mins to deliver.</p>
-                      </div>
-                    </div>
-                  <!-- Review #2 Ends -->
+
+
+
                   
                 <!-- Reviews List Ends -->
 

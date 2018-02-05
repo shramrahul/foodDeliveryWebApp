@@ -1,19 +1,17 @@
-<div class= "container ">
 
-  <div class="row-centered">
+
+<div class= "container " >
+
+  <div class="row-centered" *ngFor="let res of restaurants" >
 <!-- List #1 Starts -->
 <div class="list-box clearfix col-lg-16 col-centered">
  
   <!-- List Descriptions Starts -->
     <div class="pull-left-lg pull-left-md list-box-info ">
-      <h5 class="list-box-info-title"><a href="#">Eagle Boys Village Plaza</a></h5>
-      <ul class="list-unstyled list-inline list-box-info-tags">
-        <li><a href="#">Pizza</a>,</li>
-        <li><a href="#">American</a>,</li>
-        <li><a href="#">Sandwiches</a>,</li>
-        <li><a href="#">Steak House</a>,</li>
-        <li><a href="#">Pasta</a>,</li>
-        <li><a href="#">Wraps</a></li>
+      <h5 class="list-box-info-title"><a href="#">{{res.name}}</a></h5>
+      <ul class="list-unstyled list-inline list-box-info-tags" >
+        <li *ngFor="let food of res.foods">{{food}}</li>
+        
       </ul>
       <ul class="list-unstyled list-inline list-box-info-description text-bold">
         <li><span>Delivery In</span><br> 1h  15min</li>
@@ -52,7 +50,8 @@
 <!-- List #1 Ends -->
 
 
-
-
   </div>
+
+ 
+
 </div>
