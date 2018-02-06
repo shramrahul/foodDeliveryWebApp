@@ -1,18 +1,28 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class UtilService {
 
-  public loginUrl: string ="http://localhost:8080/login";
-  registerUrl: string="http://localhost:8080/register";
-  constructor(public http: HttpClient) { }
+  private _baseUrl: string ="http://localhost:8080/";
+  private _loginUrl: string =this._baseUrl+"login";
+  private _registerUrl: string=this._baseUrl+"register";
+  private _dashboardUrl: string=this._baseUrl+"dashboard";
+  constructor() { }
 
-  public getLoginUrl(){
-    return this.loginUrl;
-  }
-  public getRegisterUrl(){
-    return this.registerUrl;
+
+  get baseUrl(): string {
+    return this._baseUrl;
   }
 
+  get loginUrl(): string {
+    return this._loginUrl;
+  }
+
+  get registerUrl(): string {
+    return this._registerUrl;
+  }
+
+  get dashboardUrl(): string {
+    return this._dashboardUrl;
+  }
 }
