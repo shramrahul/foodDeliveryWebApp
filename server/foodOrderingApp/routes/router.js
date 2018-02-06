@@ -17,14 +17,6 @@ router.get('/', function (req, res, next) {
 
 //POST route for updating data
 router.post('/register', function (req, res, next) {
-    // confirm that user typed same password twice
-    // if (req.body.password !== req.body.passwordConf) {
-    //     var err = new Error('Passwords do not match.');
-    //     err.status = 400;
-    //     // res.send("passwords do not match");
-    //     return res.status(400).send({auth:false,token:null,message: "passwords do not match"});
-    // }
-
     if (req.body.email &&
         req.body.username &&
         req.body.password &&
@@ -42,9 +34,6 @@ router.post('/register', function (req, res, next) {
                 zipcode: req.body.zipcode,
                 coord: [{latitude: 123, longitude: 345}]
             },
-            // name:{fullname:"Suman"},
-            // credentials:{email: req.body.email, username: req.body.username, password: req.body.password},
-            // address: {street:req.body.street, city: req.body.city, state: req.body.state, zipcode: req.body.zipcode},
             food_ordered: [
                 {
                     date: 2018 / 1 / 3,
@@ -52,10 +41,6 @@ router.post('/register', function (req, res, next) {
                     restaurant_used: 23
                 },
             ]
-            // state: req.body.state,
-            // city: req.body.city,
-            // street: req.body.street,
-            // zipcode: req.body.zipcode
         }
 
         User.create(userData, function (error, user) {
@@ -69,17 +54,6 @@ router.post('/register', function (req, res, next) {
                 return res.status(200).send({auth: true, token: token});
             }
         });
-        // }else if (req.body.logemail && req.body.logpassword) {
-        //     User.authenticate(req.body.logemail, req.body.logpassword, function (error, user) {
-        //         if (error || !user) {
-        //             var err = new Error('Wrong email or password.');
-        //             err.status = 401;
-        //             return next(err);
-        //         } else {
-        //             req.session.userId = user._id;
-        //             return res.redirect('/profile');
-        //         }
-        //     });
     } else {
         var err = new Error('All fields required.');
         err.status = 400;
@@ -117,13 +91,45 @@ router.get('/dashboard', VerifyToken, function (req, res, next) {
                     err.status = 400;
                     return next(err);
                 } else {
-                    return res.send({user});//"user_id":user._id,"email": user.email}) ;
-                    // res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+                    return res.send({user});
                 }
             }
         });
 });
 
+router.put('/:id', function (req, res, next) {
+    const id = req.params.id;
+    // const doc = {
+    //     address: req.body.author,
+    //     username: req.body.quote,
+    //     email: req.body.source,
+    // }
+    console.log(req.body);
+    User.findByIdAndUpdate(id, req.body, {new: true}, function (err, user) {
+        if (err) return res.status(500).send("There was a problem updating the user.");
+        res.status(200).send(user);
+    })
+});
+
+
+
+
+// app.put('/words/:id', function (req, res) {
+//     console.log(req.params.id + " ----")
+//     const doc = {
+//         author: req.body.author,
+//         quote: req.body.quote,
+//         source: req.body.source,
+//         rating: req.body.rating,
+//         updatedAt: Date.now(),
+//     }
+// Word.update({_id: req.params.id}, doc, function (err, raw) {
+//     if (err) {
+//         res.send(err);
+//     }
+//     res.send(raw);
+// });
+// });
 // GET for logout logout
 router.get('/logout', function (req, res, next) {
     if (req.session) {
@@ -134,7 +140,6 @@ router.get('/logout', function (req, res, next) {
                 return next(err);
             } else {
 
-                // return res.redirect('/');
                 return res.send({auth: false, token: null})
             }
         });
