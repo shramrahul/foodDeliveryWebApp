@@ -20,9 +20,10 @@ db.once('open', function () {
 
 //use sessions for tracking logins
 app.use(session({
-    secret: 'work',
-    resave: true,
-    saveUninitialized: false,
+    secret: 'supersecret',
+    cookie: { maxAge: 2628000000 },
+    resave: false,
+    saveUninitialized: true,
     store: new MongoStore({
         mongooseConnection: db
     })
@@ -40,15 +41,14 @@ app.use(cors());
 
 // include routes
 var routes = require('./routes/router');
-var restaurant = require('./routes/restaurant');
-app.use('/',routes);
-app.use('/login', routes);
-app.use('/register',routes);
-app.use('/restaurant',restaurant);
+// app.use('',routes);
+// app.use('/login', routes);
+// app.use('/register',routes);
+// app.use('/restaurant',restaurant);
 app.use(routes);
-//app.use('login', routes);
-//app.use('register',routes);
-
+app.use('login', routes);
+app.use('register',routes);
+app.use('dashboard',routes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -70,3 +70,5 @@ app.use(function (err, req, res, next) {
 app.listen(8080, function () {
     console.log('Express app listening on port 8080');
 });
+
+module.exports = app;
