@@ -69,8 +69,10 @@ export class UserDashboardSectionComponent implements OnInit {
                 this.totalCost=0;
                 this.totalOrders=0;
 
-                userService.pushedData.subscribe(data=>this.user=data);
-                this.userService.getUser();
+                //this.user=userService.currentUser;
+                console.log("dashboard------"+this.user)
+                // userService.pushedData.subscribe(data=>this.user=data);
+                // this.userService.getUser();
               }
 
 
@@ -85,6 +87,8 @@ export class UserDashboardSectionComponent implements OnInit {
   ngOnInit() {
     //this.goForDashBoard();
     console.log("**************************************************")
+    this.authenticationService.dashboard().subscribe(data=>{
+      this.user=data.json().user})
     this.getTotalCost();
   }
 

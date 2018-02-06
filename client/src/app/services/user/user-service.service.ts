@@ -7,13 +7,13 @@ import { AuthenticationService } from '../authentication.service';
 export class UserServiceService {
 
   
-  private currentUser;
+   currentUser;
   
 
   pushedData= new EventEmitter<any>();
-  constructor (dbService:DbServiceService,authenticationService: AuthenticationService) { 
-    dbService.pushedData.subscribe(data=> this.currentUser=data);
-    dbService.getTheCurrentSessionOfLoggedUser();
+  constructor (dbService:DbServiceService,
+    private authenticationService: AuthenticationService) { 
+   
 
       console.log("current user in userservice constructor "+this.currentUser)
 
@@ -74,8 +74,14 @@ export class UserServiceService {
   * this method emits the class variable, currentUser, using EventEmitter
   */
  getUser(){
-   console.log("currentUser in userService"+this.currentUser)
-   this.pushedData.emit(this.currentUser);
+  this.authenticationService.dashboard().subscribe(data=>{
+    this.currentUser=data.json().user
+    
+    
+    // this.pushedData.emit( data.json().user )
+  });
+  console.log("currentUser in userService"+this.currentUser)
+ 
  }
 
 }

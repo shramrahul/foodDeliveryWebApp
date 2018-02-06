@@ -4,6 +4,8 @@ import { DbServiceService } from '../db-services/db-service.service';
 import { HttpClient } from '@angular/common/http';
 import { Response } from '@angular/http/src/static_response';
 import { Http } from '@angular/http';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class RestaurantServiceService {
@@ -35,13 +37,18 @@ private http: Http) {
   
  }
 
- getTopRestaurants(){
-    (this.http.get("http://localhost:8080/restaurant/get"))
-    .map((data: Response) => data.json())
-    .subscribe((x)=>{
-    this.value=x;
-    console.log(this.value)
+ getTopRestaurants(): any{
+    return this.http.get("http://localhost:8080/restaurant/get")
+    .map((data: Response) => {
+      if(data.status == 200) {
+        console.log(data)
+        return data;
+        
+      }else {
+        return "error";
+      }
     })
+    
     
  }
 }

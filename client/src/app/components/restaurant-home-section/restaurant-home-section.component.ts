@@ -32,6 +32,8 @@ export class RestaurantHomeSectionComponent implements OnInit {
 
     this.cart=[]; 
     this.total=5;
+    this.restaurant=restaurantService.value;
+    console.log(this.restaurant)
 
     this.reviewForm= formBuilder.group({
       'review':["", [Validators.required]]
