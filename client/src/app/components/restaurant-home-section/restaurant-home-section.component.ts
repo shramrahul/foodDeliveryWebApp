@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RestaurantServiceService } from '../../services/restaurant/restaurant-service.service';
 import { UserServiceService } from '../../services/user/user-service.service';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-restaurant-home-section',
@@ -15,23 +18,38 @@ export class RestaurantHomeSectionComponent implements OnInit {
   total:number;
   deliveryCharge: number=5;
   reviews :Array<{}>=[]
-  textReview:string=' i am a boy and i liked it ';
- 
+  reviewForm: FormGroup;
+  currentReview;
+
+
   constructor( private restaurantService: RestaurantServiceService,
-            private userService :UserServiceService ) {
+            private userService :UserServiceService,
+            private formBuilder: FormBuilder
+          ) {
 
     this.cart=[]; 
     this.total=5;
+
+    this.reviewForm= formBuilder.group({
+      'review':["", [Validators.required]]
+    });
     
+    this.reviewForm.statusChanges.subscribe();
     
+    this.currentReview={
+      "user":"", 
+      "restaurant_id":"", 
+      "review":"",
+      "date":""
+    }
 
     this.reviews=[
-      {"user":"123", 
+      {"user":"Shreedhar", 
         "restaurant_id":"23456", 
         "review":"this is the best resurant ever seen in the town",
         "date":"10/10/2017"
       },
-      {"user_id":"456", 
+      {"user":"suman", 
         "restaurant_id":"898778", 
         "review":"cool food and i loved it",
         "date":"10/10/2017"
@@ -74,23 +92,24 @@ export class RestaurantHomeSectionComponent implements OnInit {
     this.restaurantService.pushedData.subscribe(data=> this.restaurant=data );
     this.restaurantService.getRestaurant();
     
-    this.userService.pushedData.subscribe(data=> this.user= data);
+    this.userService.pushedData.subscribe(data=> {
+      console.log("user in restaurant home >"+this.user)
+      this.user= data});
     this.userService.getUser();
   }
 
 
   onReviewPost(){
-      const rev={
-        "user_id":this.user.name,
-        "restaurant_id":this.restaurant.name,
-        "review":this.textReview,
-        date: new Date()
 
-      }
+    this.currentReview.review= this.reviewForm.value.review;
+    this.currentReview.user=this.user.name;
+    this.currentReview.restaurant_id= this.restaurant.name;
+    this.currentReview.date= new Date();
+
 
       setTimeout(() => {
         
-        this.reviews.push(rev);
+        this.reviews.push(this.currentReview);
         console.log(this.reviews)
       }, 1000);
       
@@ -98,7 +117,7 @@ export class RestaurantHomeSectionComponent implements OnInit {
 
   onCheckout(){
 
-   
+   this.userService.pushData(this.user);
     console.log("before adding order"+this.user.food_ordered)
 
     for (var order of this.cart){

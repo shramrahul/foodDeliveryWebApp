@@ -13,6 +13,7 @@ export class AuthenticationService {
     // set token if saved in local storage
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
+    this.userId = currentUser && currentUser.userId;
   }
 
   login(username: string, password: string): Observable<boolean> {
@@ -29,7 +30,7 @@ export class AuthenticationService {
           console.log("Login:"+this.token);
 
           // store username and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify({username: this.userId, token: token}));
+          localStorage.setItem('currentUser', JSON.stringify({userId: this.userId, token: token}));
 
           // return true to indicate successful login
           return true;
@@ -72,14 +73,15 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
   }
 
-  dashboard(): Observable<boolean> {
+  dashboard(): Observable<Response> {
 
+    console.log(this.token+"+++++++++++++++++++++++++++++++++++++++++"+ this.userId)
     let headers = new Headers({'x-access-token': this.token, 'userId':this.userId});
     let options = new RequestOptions({headers: headers});
     return this.http.get(this.utilservice.dashboardUrl, options)
       .map((response: Response) => {
-       console.log( JSON.stringify(response));
-        return false;
+      // console.log( JSON.stringify(response));
+        return response;
       });
   }
 }
