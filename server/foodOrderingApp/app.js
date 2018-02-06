@@ -41,14 +41,11 @@ app.use(cors());
 
 // include routes
 var routes = require('./routes/router');
-<<<<<<< HEAD
 var restaurant = require('./routes/restaurant');
 // app.use('',routes);
 // app.use('/login', routes);
 // app.use('/register',routes);
  app.use('/restaurant',restaurant);
-=======
->>>>>>> 9eb191be82901e75b061fbc12e897ec61a7e8c58
 app.use(routes);
 app.use('/',routes);
 // app.use('login', routes);
