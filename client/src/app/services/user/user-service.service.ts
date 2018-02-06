@@ -14,11 +14,18 @@ export class UserServiceService {
     this.currentUser=dbService.getTheCurrentSessionOfLoggedUser();
   }
 
+  /**
+   * this method is used to assign the value to the class variable currentUser
+   * @param value 
+   */
  pushData(value:any){
    //console.log( value)
   this.currentUser=value;
  }
 
+ /**
+  * this method emits the class variable, currentUser, using EventEmitter
+  */
  getUser(){
    this.pushedData.emit(this.currentUser);
  }

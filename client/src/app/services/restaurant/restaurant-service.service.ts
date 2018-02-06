@@ -11,16 +11,26 @@ export class RestaurantServiceService {
 
  }
 
+ /**
+  * this method assigns the value to the class variable
+  * @param value - a variable that grabs the value
+  */
  pushData(value:any){
    this.value=value;
  }
 
+ /**
+  * this method emits the class varaible, value, using eventEmitter
+  */
  getRestaurant(){
   this.pushedData.emit(this.value);
  }
 
- getTopRestaurants(){
-    this.dbService.getAllTopResturants()
+
+ getSearchRestaurant(search_key: String){
+  this.pushedData.emit(search_key);
  }
 
+
+ getNearByRestaurants(){}
 }

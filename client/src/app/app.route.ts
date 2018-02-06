@@ -11,6 +11,7 @@ const MY_ROUTES: Routes = [
   {path: 'register', component: RegisterComponent},
   {path:'restaurants', component:RestaurantsSectionComponent},
   {path:'restaurants/restaurant-home/profile', component: UserDashboardSectionComponent},
-  {path:'restaurants/restaurant-home', component :RestaurantHomeSectionComponent}
+  {path:'restaurants/restaurant-home', component :RestaurantHomeSectionComponent},
+  {path:'restaurant-home', component :RestaurantHomeSectionComponent}
 ]
 export const routes = RouterModule.forRoot(MY_ROUTES);

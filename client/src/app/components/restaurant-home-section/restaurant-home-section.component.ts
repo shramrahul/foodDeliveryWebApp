@@ -91,7 +91,7 @@ export class RestaurantHomeSectionComponent implements OnInit {
   ngOnInit() {
     this.restaurantService.pushedData.subscribe(data=> this.restaurant=data );
     this.restaurantService.getRestaurant();
-    
+    console.log(this.restaurant)
     this.userService.pushedData.subscribe(data=> this.user= data);
     this.userService.getUser();
   }

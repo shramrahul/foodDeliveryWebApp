@@ -120,10 +120,12 @@
                     <form [formGroup]="reviewForm">
                       <textarea class="form-control" rows="4" 
                       placeholder="Message should be atleast 130 charecters"
-                      formControlName= "review"
-                      >
+                      formControlName= "review">
 
                       </textarea>
+                      <!-- <div class="err" *ngIf="!form.controls['review'].valid">
+                        * Required
+                      </div> -->
                       <div class="clearfix">
                         <ul class="list-unstyled list-inline rating-star pull-left">
                           <li><i class="fa fa-star"></i></li>

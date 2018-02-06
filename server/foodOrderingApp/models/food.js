@@ -10,23 +10,23 @@ var foodSchema =new mongoose.Schema({
     },
     name: {
         type: String,
-        unique: true,
+        unique: false,
         required: true,
         trim: true
     },
     cuisine:{
         type: String,
-        unique: true,
+        unique: false,
         required: true,
         trim: true
     },
     price:{
         type: String,
-        unique: true,
+        unique: false,
         required: true,
         trim: true
     }
 });
 
 
-module.exports = mongoose.model('food',foodSchema);
+module.exports = mongoose.model('foods',foodSchema);
