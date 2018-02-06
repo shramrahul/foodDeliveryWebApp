@@ -23,15 +23,16 @@ router.get('/get', function (req, res, next) {
     })
 });
 router.post('/search', function (req, res, next) {
-
+    let latitude = req.body.latitude;
+    let longitude = req.body.longitude;
     restaurants.find({
         location: {
-            '$near': [-91.965866,41.007884],
-             '$maxDistance' : 1000/6371
+            '$near': [longitude, latitude],
+            '$maxDistance': 1000 / 6371
         }
     }).limit(5).exec(function (error, restaurants) {
-       res.send({restaurants});
+        res.send({restaurants});
     });
 
-
+});
   module.exports = router;
