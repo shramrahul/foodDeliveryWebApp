@@ -27,6 +27,7 @@ import {AuthenticationService} from './services/authentication.service';
 import {HttpModule} from '@angular/http';
 import { RestaurantServiceService } from './services/restaurant/restaurant-service.service';
 import { UserServiceService } from './services/user/user-service.service';
+import { ChangeRowColorDirective } from './directives/change-row-color.directive';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { UserServiceService } from './services/user/user-service.service';
     RestaurantsSectionComponent,
     RestaurantHomeSectionComponent,
     HomeBodySectionComponent,
-    UserDashboardSectionComponent
+    UserDashboardSectionComponent,
+    ChangeRowColorDirective
   ],
   imports: [
     BrowserModule,
