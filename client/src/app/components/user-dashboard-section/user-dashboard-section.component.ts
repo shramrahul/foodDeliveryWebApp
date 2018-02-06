@@ -69,8 +69,8 @@ export class UserDashboardSectionComponent implements OnInit {
                 this.totalCost=0;
                 this.totalOrders=0;
 
-                // userService.pushedData.subscribe(data=>this.user=data);
-                // this.userService.getUser();
+                userService.pushedData.subscribe(data=>this.user=data);
+                this.userService.getUser();
               }
 
 
@@ -83,9 +83,8 @@ export class UserDashboardSectionComponent implements OnInit {
  * 
  */
   ngOnInit() {
-    this.goForDashBoard();
+    //this.goForDashBoard();
     console.log("**************************************************")
-    console.log(this.user.username)
     this.getTotalCost();
   }
 
@@ -96,7 +95,9 @@ export class UserDashboardSectionComponent implements OnInit {
    * that the user has ordered 
    */
   getTotalCost(){
+    console.log("her===============================e"+this.user)
     for (var cos in this.user.food_ordered){
+      console.log("price="+this.user.food_ordered[cos].food.price)
       this.totalCost+= (this.user.food_ordered[cos].food.price);
       this.totalOrders++;
    }

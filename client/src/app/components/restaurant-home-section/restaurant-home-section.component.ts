@@ -92,7 +92,9 @@ export class RestaurantHomeSectionComponent implements OnInit {
     this.restaurantService.pushedData.subscribe(data=> this.restaurant=data );
     this.restaurantService.getRestaurant();
     
-    this.userService.pushedData.subscribe(data=> this.user= data);
+    this.userService.pushedData.subscribe(data=> {
+      console.log("user in restaurant home >"+this.user)
+      this.user= data});
     this.userService.getUser();
   }
 
@@ -115,7 +117,7 @@ export class RestaurantHomeSectionComponent implements OnInit {
 
   onCheckout(){
 
-   
+   this.userService.pushData(this.user);
     console.log("before adding order"+this.user.food_ordered)
 
     for (var order of this.cart){
