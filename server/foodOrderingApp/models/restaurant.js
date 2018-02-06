@@ -34,7 +34,7 @@ var restaurantSchema =new mongoose.Schema(
     name: String,
     address:{street:String, city:String, state:String, zip:String},
     location:{type: [Number],index:'2d'},
-    foods: [ {id: {String}, cuisine: {String}, name: {String}, price: {Number} }],
+    foods: [ {id:String, cuisine:String, name: String, price: Number }],
     rating: Number,
     reviews: [{username: String, comment: String, rating: Number}],
     images: [String]
