@@ -27,11 +27,8 @@ import {AuthenticationService} from './services/authentication.service';
 import {HttpModule} from '@angular/http';
 import { RestaurantServiceService } from './services/restaurant/restaurant-service.service';
 import { UserServiceService } from './services/user/user-service.service';
-<<<<<<< HEAD
 import { ChangeRowColorDirective } from './directives/change-row-color.directive';
-=======
 import {AuthGuard} from './guard/auth.guard';
->>>>>>> 2e9eaa0ed4766a9195a0fea432abcfa6a2d81c3b
 
 
 @NgModule({

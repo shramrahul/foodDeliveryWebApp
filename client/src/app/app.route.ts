@@ -11,13 +11,10 @@ const MY_ROUTES: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path:'restaurants', component:RestaurantsSectionComponent},
-<<<<<<< HEAD
   {path:'restaurants/restaurant-home/profile', component: UserDashboardSectionComponent},
   {path:'restaurants/restaurant-home', component :RestaurantHomeSectionComponent},
-=======
   {path:'profile', component: UserDashboardSectionComponent, canActivate:[AuthGuard]},
   {path:'restaurants',component : RestaurantsSectionComponent},
->>>>>>> 2e9eaa0ed4766a9195a0fea432abcfa6a2d81c3b
   {path:'restaurant-home', component :RestaurantHomeSectionComponent}
 ]
 export const routes = RouterModule.forRoot(MY_ROUTES);

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {AuthenticationService} from '../../services/authentication.service';
 import {FormBuilder} from '@angular/forms';
 import {UtilService} from '../../services/util.service';
+import { UserServiceService } from '../../services/user/user-service.service';
 
 @Component({
   selector: 'app-user-dashboard-section',
@@ -12,55 +13,65 @@ import {UtilService} from '../../services/util.service';
 export class UserDashboardSectionComponent implements OnInit {
 
    totalCost ;
+   totalOrders;
 
-  user={
-    id: 1,
-    name:{
-      firstname: "shreeram",
-      lastname: "chaulagain"
-      },
-    address:{
-      building:"1000N",
-      street:"4th Street",
-      district:"fairfield",
-      zipcode: "",
-      coord:[
-        {lati:123.23,
-        long:12.2345}
-        ]
-      },
-    credentials:{
-      username: "shramshram",
-      password: "shamshram",
-      email:	"shreeamchaulagain@gmai.com"
-      },
+  // user={
+  //   id: 1,
+  //   name:{
+  //     firstname: "shreeram",
+  //     lastname: "chaulagain"
+  //     },
+  //   address:{
+  //     building:"1000N",
+  //     street:"4th Street",
+  //     district:"fairfield",
+  //     zipcode: "",
+  //     coord:[
+  //       {lati:123.23,
+  //       long:12.2345}
+  //       ]
+  //     },
+  //   credentials:{
+  //     username: "shramshram",
+  //     password: "shamshram",
+  //     email:	"shreeamchaulagain@gmai.com"
+  //     },
 
-    food_ordered:[
-            {
-              date:"2017/13/14",
-              food_id: 1,
-              restaurant_id: 12345,
-              cost:"20"
-            },
-            {
-              date:"2017/13/14",
-              food_id: 2,
-              restaurant_id: 56784,
-              cost:"20"
-            },
-            {
-              date:"2017/13/14",
-              food_id: 3,
-              restaurant_id: 34567,
-              cost:"20"
-            }
-        ]
+  //   food_ordered:[
+  //           {
+  //             date:"2017/13/14",
+  //             food: {"id":1007,"name":"Borsch ","cuisine":"Ukraine","price":30},
+  //             restaurant_id: 12345,
+  //             cost:"20"
+  //           },
+  //           {
+  //             date:"2017/13/14",
+  //             food: {"id":1007,"name":"Borsch ","cuisine":"Ukraine","price":30},
+  //             restaurant_id: 56784,
+  //             cost:"20"
+  //           },
+  //           {
+  //             date:"2017/13/14",
+  //             food: {"id":1007,"name":"Borsch ","cuisine":"Ukraine","price":30},
+  //             restaurant_id: 34567,
+  //             cost:"20"
+  //           }
+  //       ]
 
-  }
+  // }
+
+  user;
   constructor(private myHttpService: UtilService,
               private formBuilder: FormBuilder,
               private router: Router,
-              private authenticationService: AuthenticationService) { }
+              private authenticationService: AuthenticationService,
+            private userService: UserServiceService) { 
+                this.totalCost=0;
+                this.totalOrders=0;
+
+                // userService.pushedData.subscribe(data=>this.user=data);
+                // this.userService.getUser();
+              }
 
 
 /**
@@ -73,11 +84,9 @@ export class UserDashboardSectionComponent implements OnInit {
  */
   ngOnInit() {
     this.goForDashBoard();
+    console.log("**************************************************")
+    console.log(this.user.username)
     this.getTotalCost();
-<<<<<<< HEAD
-  
-=======
->>>>>>> 2e9eaa0ed4766a9195a0fea432abcfa6a2d81c3b
   }
 
 
@@ -87,21 +96,17 @@ export class UserDashboardSectionComponent implements OnInit {
    * that the user has ordered 
    */
   getTotalCost(){
-<<<<<<< HEAD
     for (var cos in this.user.food_ordered){
       this.totalCost+= (this.user.food_ordered[cos].food.price);
       this.totalOrders++;
-=======
-
-    for (var cos of this.user.food_ordered){
-      this.totalCost+= parseFloat(cos.cost);
->>>>>>> 2e9eaa0ed4766a9195a0fea432abcfa6a2d81c3b
    }
   }
 
   private goForDashBoard() {
-    this.authenticationService.dashboard().subscribe(()=>{
-
-    })
+    this.authenticationService.dashboard().subscribe(
+      data=>{
+        console.log(data.json().user);
+     this.user=data.json().user ;
+      });
   }
 }
