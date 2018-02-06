@@ -15,6 +15,8 @@ export class SearchSectionComponent implements OnInit {
 
   searchForm: FormGroup;
   search_key:String;
+  currentLatitude;
+  currentLongitude;
 
   searchedRestaurant:any;
 
@@ -42,6 +44,8 @@ export class SearchSectionComponent implements OnInit {
          // this.geolocationPosition = position,
           console.log(position.coords.latitude+""+ position.coords.longitude);
           console.log(position)
+          this.currentLatitude= position.coords.latitude;
+          this.currentLongitude=position.coords.longitude;
         },
         error => {
           switch (error.code) {
@@ -61,13 +65,6 @@ export class SearchSectionComponent implements OnInit {
 
   }
 
- /**
-  * this method is used to search the nearby resturants that are available near the current location
-  of the user.
-  */
-  onClickSearchNearBy(){
-
-  }
 
 /**
  * when the user inputs the name of the restaurant in the search box and clicks the
@@ -77,8 +74,12 @@ export class SearchSectionComponent implements OnInit {
   onClickSearch(){
     this.search_key=this.searchForm.value.search_key;
 
-    this.restaurantService.getSearchRestaurant(this.search_key)
+    this.restaurantService.getSearchRestaurant(this.search_key, this.currentLatitude, this.currentLongitude)
 
+  }
+
+  onClickTopRestaurant(){
+   
   }
 
 }

@@ -19,14 +19,16 @@ export class RestaurantsSectionComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.dbService.pushedData.subscribe(data=> this.restaurants=data);
-     this.dbService.pushData()
+    this.restaurants= this.resturantService.getTopRestaurants();
+     //this.dbService.pushData()
+    
     console.log('res: ', this.restaurants);
     //this.restaurants=this.dbService.restaurants;
   }
 
   onCLick(res){
-    this.resturantService.pushData(res);
+    this.resturantService.pushedData.subscribe(data=> this.restaurants= data);
+    this.resturantService.getTopRestaurants();
   }
 
 }

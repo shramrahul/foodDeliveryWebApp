@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DbServiceService } from '../../services/db-services/db-service.service';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { RestaurantServiceService } from '../../services/restaurant/restaurant-service.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-nav',
@@ -11,6 +14,8 @@ import {Router} from '@angular/router';
 export class NavComponent implements OnInit {
 
   constructor(private authenticationService : AuthenticationService, private router :Router) { }
+
+  constructor(private dbService:DbServiceService, private restaurantService: RestaurantServiceService ) { }
 
   ngOnInit() {
   }
@@ -25,8 +30,9 @@ export class NavComponent implements OnInit {
 
 
 
-  onClick(dbService:DbServiceService){
-    dbService.pushData();
+
+  onClickTopRestaurant(){
+     this.restaurantService.getTopRestaurants();
   }
 
 }

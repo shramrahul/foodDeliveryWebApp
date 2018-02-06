@@ -4,6 +4,8 @@ import { UserServiceService } from '../../services/user/user-service.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { DbServiceService } from '../../services/db-services/db-service.service';
+
 
 @Component({
   selector: 'app-restaurant-home-section',
@@ -23,6 +25,7 @@ export class RestaurantHomeSectionComponent implements OnInit {
 
 
   constructor( private restaurantService: RestaurantServiceService,
+               private dbService:DbServiceService ,
             private userService :UserServiceService,
             private formBuilder: FormBuilder
           ) {
@@ -92,8 +95,16 @@ export class RestaurantHomeSectionComponent implements OnInit {
     this.restaurantService.pushedData.subscribe(data=> this.restaurant=data );
     this.restaurantService.getRestaurant();
     
-    this.userService.pushedData.subscribe(data=> this.user= data);
-    this.userService.getUser();
+    // this.userService.pushedData.subscribe(data=> {
+    //   console.log("user in restaurant home >"+data)
+    //   this.user= data});
+    // this.userService.getUser();
+
+    this.dbService.pushedData.subscribe(data=> {
+      console.log("user in restaurant home >"+data)
+      this.user= data});
+    this.dbService.getTheCurrentSessionOfLoggedUser();
+    
   }
 
 
@@ -115,7 +126,7 @@ export class RestaurantHomeSectionComponent implements OnInit {
 
   onCheckout(){
 
-   
+   this.userService.pushData(this.user);
     console.log("before adding order"+this.user.food_ordered)
 
     for (var order of this.cart){

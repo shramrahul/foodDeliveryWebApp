@@ -13,7 +13,7 @@ var restaurants= require('../models/restaurant')
         
 //     })
 //   });
-router.get('/getTopRestaurants', function(req, res, next) {
+router.get('/get', function(req, res, next) {
    
     restaurants.findOne({},(err,food)=>{
         if(err) res.send(err);

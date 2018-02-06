@@ -1,9 +1,10 @@
 import { Injectable,EventEmitter } from '@angular/core';
+import { AuthenticationService } from '../authentication.service';
 
 
 @Injectable()
 export class DbServiceService {
-
+ user;
   restaurants=
 [{
     "_id":"5a6799cb27d7d85aa9198ca4",
@@ -58,7 +59,7 @@ export class DbServiceService {
 
   
  pushedData = new EventEmitter<any>();
-  constructor() {
+  constructor(private authenticationService: AuthenticationService) {
 
   }
 
@@ -68,48 +69,11 @@ export class DbServiceService {
    
   
   getTheCurrentSessionOfLoggedUser(){
-    var user={
-      id: 1,	
-      name:"Shreeram Chaulagain",
-      address:{
-        building:"1000N",
-        street:"4th Street",
-        district:"fairfield",
-        zipcode: "",
-        coord:[
-          {lati:123.23,
-          long:12.2345}
-          ]
-        },
-      credentials:{
-        username: "shramshram",
-        password: "shamshram",
-        email:	"shreeamchaulagain@gmai.com"
-        },
-    
-      food_ordered:[
-              {
-                date:"2017/13/14",
-                food: {  "id": 1001, "cuisine":"hello", "name":"Pizza", "price": 15},
-                restaurant_used: 12345,
-                      
-              },
-              {
-                date:"2017/13/14",
-                food: {  "id": 1002, "cuisine":"English", "name":"mom", "price": 15},
-                restaurant_used: 56784,
-                    
-              },
-              {
-                date:"2017/13/14",
-                food: {  "id": 1003, "cuisine":"Nepali", "name":"Tofu", "price": 15} ,
-                restaurant_used: 34567,
-                      
-              }
-          ]
-        }
-
-        return user;
+    this.authenticationService.dashboard().subscribe(data=>{
+      console.log("user in dbService "+data.json().user)
+      this.pushedData.emit( data.json().user )
+    });
+     // return this.user;
   }
 
 
