@@ -19,8 +19,10 @@ export class AuthenticationService {
 
     return this.http.post(this.utilservice.loginUrl, {logemail: username, logpassword: password})
       .map((response: Response) => {
+        console.log("*******************")
         // login successful if there's a jwt token in the response
-        console.log('token: ' + response.json().token);
+        console.log('token: ' + response);
+        console.log('token: ' + response.json());
         let token = response.json() && response.json().token;
         if (token) {
           // set token property
@@ -44,8 +46,13 @@ export class AuthenticationService {
     return this.http.post(this.utilservice.registerUrl, {email: email, username: username, password: password, passwordConf: passwordConf})
       .map((response: Response) => {
         console.log('token: ' + response);
-        let token = response.json() && response.json().token;
-        if (token) {
+       // let token = response.json() && response.json().token;
+
+        let registered = response.json().auth;
+        if(registered)return true; // successfully registered case;
+        // error in registering
+        return false;
+       /* if (token) {
           // set token property
           this.token = token;
 
@@ -57,7 +64,7 @@ export class AuthenticationService {
         } else {
           // return false to indicate failed login
           return false;
-        }
+        }*/
       });
   }
 
