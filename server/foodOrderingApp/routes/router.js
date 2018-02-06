@@ -97,6 +97,39 @@ router.get('/dashboard', VerifyToken, function (req, res, next) {
         });
 });
 
+router.put('/:id', function (req, res, next) {
+    const id = req.params.id;
+    // const doc = {
+    //     address: req.body.author,
+    //     username: req.body.quote,
+    //     email: req.body.source,
+    // }
+    console.log(req.body);
+    User.findByIdAndUpdate(id, req.body, {new: true}, function (err, user) {
+        if (err) return res.status(500).send("There was a problem updating the user.");
+        res.status(200).send(user);
+    })
+});
+
+
+
+
+// app.put('/words/:id', function (req, res) {
+//     console.log(req.params.id + " ----")
+//     const doc = {
+//         author: req.body.author,
+//         quote: req.body.quote,
+//         source: req.body.source,
+//         rating: req.body.rating,
+//         updatedAt: Date.now(),
+//     }
+// Word.update({_id: req.params.id}, doc, function (err, raw) {
+//     if (err) {
+//         res.send(err);
+//     }
+//     res.send(raw);
+// });
+// });
 // GET for logout logout
 router.get('/logout', function (req, res, next) {
     if (req.session) {
