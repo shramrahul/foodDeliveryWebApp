@@ -21,8 +21,9 @@ db.once('open', function () {
 //use sessions for tracking logins
 app.use(session({
     secret: 'supersecret',
-    resave: true,
-    saveUninitialized: false,
+    cookie: { maxAge: 2628000000 },
+    resave: false,
+    saveUninitialized: true,
     store: new MongoStore({
         mongooseConnection: db
     })
@@ -66,6 +67,8 @@ app.use(function (err, req, res, next) {
 
 
 // listen on port 3000
-app.listen(8081, function () {
+app.listen(8080, function () {
     console.log('Express app listening on port 8080');
 });
+
+module.exports = app;

@@ -22,8 +22,9 @@ export class LoginComponent implements OnInit {
               private authenticationService: AuthenticationService) {
     this.form = formBuilder.group({
       'password': ['', [Validators.required]],
-      'email': ['', [Validators.required,
-        Validators.pattern('[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?')
+      'email': ['', [Validators.required
+        //,
+       // Validators.pattern('[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?')
       ]],
     });
 
@@ -38,6 +39,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+   // this.router.navigate(['/profile']);
+
     this.loading = true;
     this.model.username = this.form.value.email;
     this.model.password = this.form.value.password;

@@ -27,6 +27,7 @@ import {AuthenticationService} from './services/authentication.service';
 import {HttpModule} from '@angular/http';
 import { RestaurantServiceService } from './services/restaurant/restaurant-service.service';
 import { UserServiceService } from './services/user/user-service.service';
+import {AuthGuard} from './guard/auth.guard';
 
 
 @NgModule({
@@ -55,12 +56,13 @@ import { UserServiceService } from './services/user/user-service.service';
     ReactiveFormsModule,
     FormsModule
   ],
- 
+
   providers: [UtilService,
     AuthenticationService,
-    DbServiceService, 
-    RestaurantServiceService, 
-    UserServiceService
+    DbServiceService,
+    RestaurantServiceService,
+    UserServiceService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

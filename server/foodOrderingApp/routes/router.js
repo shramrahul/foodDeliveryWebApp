@@ -97,6 +97,9 @@ router.post('/login', function (req, res, next) {
 router.get('/dashboard',VerifyToken, function (req, res, next) {
     console.log(req.session.userId);
     User.findById(req.session.userId)
+router.get('/dashboard', VerifyToken,function (req, res, next) {
+    userIdd  = req.headers['userid'];
+    User.findById(userIdd)
         .exec(function (error, user) {
             if (error) {
                 return next(error);

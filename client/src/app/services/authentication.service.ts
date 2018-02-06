@@ -7,6 +7,7 @@ import {UtilService} from './util.service';
 @Injectable()
 export class AuthenticationService {
   public token: string;
+  public userId: string;
 
   constructor(private http: Http, private utilservice: UtilService) {
     // set token if saved in local storage
@@ -20,14 +21,15 @@ export class AuthenticationService {
     return this.http.post(this.utilservice.loginUrl, {logemail: username, logpassword: password})
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
-        console.log('token: ' + response.json().token);
         let token = response.json() && response.json().token;
         if (token) {
           // set token property
           this.token = token;
+          this.userId =  response.json().user_id;
+          console.log("Login:"+this.token);
 
           // store username and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify({username: username, token: token}));
+          localStorage.setItem('currentUser', JSON.stringify({username: this.userId, token: token}));
 
           // return true to indicate successful login
           return true;
@@ -43,9 +45,12 @@ export class AuthenticationService {
 
     return this.http.post(this.utilservice.registerUrl, {email: email, username: username, password: password, passwordConf: passwordConf})
       .map((response: Response) => {
-        console.log('token: ' + response);
-        let token = response.json() && response.json().token;
-        if (token) {
+
+        let registered = response.json().auth;
+        if(registered)return true; // successfully registered case;
+        // error in registering
+        return false;
+       /* if (token) {
           // set token property
           this.token = token;
 
@@ -57,7 +62,7 @@ export class AuthenticationService {
         } else {
           // return false to indicate failed login
           return false;
-        }
+        }*/
       });
   }
 
@@ -69,11 +74,11 @@ export class AuthenticationService {
 
   dashboard(): Observable<boolean> {
 
-    let headers = new Headers({'x-access-token': this.token});
+    let headers = new Headers({'x-access-token': this.token, 'userId':this.userId});
     let options = new RequestOptions({headers: headers});
     return this.http.get(this.utilservice.dashboardUrl, options)
       .map((response: Response) => {
-       console.log( response.json().toString());
+       console.log( JSON.stringify(response));
         return false;
       });
   }
