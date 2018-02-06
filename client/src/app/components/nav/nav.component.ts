@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DbServiceService } from '../../services/db-services/db-service.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {AuthenticationService} from '../../services/authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -8,11 +9,19 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
- 
-  constructor() { }
+
+  constructor(private authenticationService : AuthenticationService, private router :Router) { }
 
   ngOnInit() {
   }
+  OnLogout(){
+    var x = document.getElementById("logoutBtn");
+    x.style.display = "none";
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
+
+  }
+
 
 
 

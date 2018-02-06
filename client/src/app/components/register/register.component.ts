@@ -40,8 +40,12 @@ export class RegisterComponent implements OnInit {
     this.model.email = this.form.value.email;
     this.model.username = this.form.value.userName;
     this.model.password = this.form.value.password;
-    this.model.passwordConf = this.form.value.password;
-    this.authenticationService.register(this.model.email, this.model.username, this.model.password, this.model.passwordConf)
+    this.model.state = this.form.value.state;
+    this.model.city = this.form.value.city;
+    this.model.zipcode = this.form.value.zip;
+    this.model.street = this.form.value.street;
+    this.authenticationService.register(this.model)
+    //this.authenticationService.register(this.model.email, this.model.username, this.model.password, this.model.passwordConf)
       .subscribe(result => {
         if (result === true) {
           console.log(result);
@@ -61,7 +65,7 @@ export class RegisterComponent implements OnInit {
     this.authenticationService.login(this.model.email, this.model.password)
       .subscribe(result => {
         if (result === true) {
-          console.log(result);
+          //console.log(result);
           this.router.navigate(['/profile']);
         } else {
           this.error = 'Username or password is incorrect';

@@ -15,6 +15,7 @@ const MY_ROUTES: Routes = [
   {path:'restaurants/restaurant-home', component :RestaurantHomeSectionComponent},
   {path:'profile', component: UserDashboardSectionComponent, canActivate:[AuthGuard]},
   {path:'restaurants',component : RestaurantsSectionComponent},
-  {path:'restaurant-home', component :RestaurantHomeSectionComponent}
+  {path:'restaurant-home', component :RestaurantHomeSectionComponent},
+  { path: '**', redirectTo: 'profile' }
 ]
 export const routes = RouterModule.forRoot(MY_ROUTES);
