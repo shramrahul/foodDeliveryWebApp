@@ -87,6 +87,10 @@ router.post('/login', function (req, res, next) {
                 return res.status(401).send({auth:false,token:null});
             } else {
                 req.session.userId = user._id;
+                console.dir(req.session);
+                console.log("Login________"+req.session.userId);
+
+
                 return res.status(200).send({"user_id": user._id, "token": token,})//res.redirect('/profile');
             }
         });
@@ -94,8 +98,9 @@ router.post('/login', function (req, res, next) {
 })
 
 // GET route after registering
-router.get('/dashboard',VerifyToken, function (req, res, next) {
-    User.findById(req.session.userId)
+router.get('/dashboard', VerifyToken,function (req, res, next) {
+    userIdd  = req.headers['userid'];
+    User.findById(userIdd)
         .exec(function (error, user) {
             if (error) {
                 return next(error);
