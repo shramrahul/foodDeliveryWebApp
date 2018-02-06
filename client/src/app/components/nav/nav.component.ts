@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DbServiceService } from '../../services/db-services/db-service.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { RestaurantServiceService } from '../../services/restaurant/restaurant-service.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-nav',
@@ -9,15 +11,16 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 })
 export class NavComponent implements OnInit {
  
-  constructor() { }
+  constructor(private dbService:DbServiceService, private restaurantService: RestaurantServiceService ) { }
 
   ngOnInit() {
   }
 
 
+ 
 
-  onClick(dbService:DbServiceService){
-    dbService.pushData();
+  onClickTopRestaurant(){
+     this.restaurantService.getTopRestaurants(); 
   }
 
 }

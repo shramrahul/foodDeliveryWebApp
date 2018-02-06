@@ -30,38 +30,16 @@ var restaurantSchema =new mongoose.Schema(
 // }
 
 {
-    "_id": {
-        "$oid": {type:String}
-    },
-    "address": {
-        "building": {type:String},
-        "coord": {
-            "long": {type:Number},
-            "lat": {type:Number}
-        },
-        "street": {type:String},
-        "zipcode": {type:String}
-    },
-    "district": {type:String},
-    "cuisine": {type:String},
-    "grades": [
-        {
-            "date": {type:String},
-            "grade": {type:String},
-            "score": {type:Number}
-        },
-    ],
-    "name": {type:String},
-    "restaurant_id": {type:String},
-    "foods": [
+    id: String,
+    name: String,
+    address:{street:String, city:String, state:String, zip:String},
+    location: [Number],
+    foods: [String],
+    rating: Number,
+    reviews: [{username: String, comment: String, rating: Number}],
+    images: [String]
+}, {collection: "restaurant"})
 
-    {type:String}
-        
-    ]
-}
+restaurantSchema.index({location: '2d'});
 
-
-);
-
-
-module.exports = mongoose.model('restaurant ',restaurantSchema);
+module.exports = mongoose.model("restaurant", restaurantSchema);
