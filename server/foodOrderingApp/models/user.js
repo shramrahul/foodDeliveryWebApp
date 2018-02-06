@@ -5,49 +5,36 @@ var jwt = require('jsonwebtoken');
 var config = require('../config')
 var VerifyToken = require('../auth/VerifyToken');
 var UserSchema = new mongoose.Schema({
-    name: {
-        fullname: {type: String}
+    email: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true
     },
+    username: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+
     address: {
         street: {type: String},
         city: {type: String},
         state: {type: String},
-        zipcode: {type: Number},
+        zipcode: {type: String},
         coord:[{latitude:{type:Number}, longitude:{type:Number}}]
     },
-    credentials: {
-        username: {type: String, unique: true, required: true, trim: true},
-        password: {type: String, required: true},
-        email: {type: String, unique: true, required: true, trim: true}
-    },
+
 
     food_ordered:[
         {date:Date, food: {id:String, cuisine:String, name:String,price:Number},restaurant_used:Number},
-        {date:Date, food: {id:String, cuisine:String, name:String,price:Number},restaurant_used:Number},
-        {date:Date, food: {id:String, cuisine:String, name:String,price:Number},restaurant_used:Number},
-        {date:Date, food: {id:String, cuisine:String, name:String,price:Number},restaurant_used:Number},
-        ]
-    // state: {
-    //     type: String,
-    //     required: true
-    // },
-    // city: {
-    //     type: String,
-    //     required: true
-    // },
-    // street: {
-    //     type: String,
-    //     required: true
-    // },
-    // zipcode: {
-    //     type: String,
-    //     required: true
-    // }
+    ]
 
-    // passwordConf: {
-    //   type: String,
-    //   required: true,
-    // }
 });
 
 

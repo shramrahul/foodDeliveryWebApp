@@ -31,9 +31,17 @@ router.post('/register', function (req, res, next) {
         req.body.state && req.body.city && req.body.street && req.body.zipcode ) {
 
         var userData = {
-            credentials:{email: req.body.email, username: req.body.username, password: req.body.password},
-            address: {street:req.body.street, city: req.body.city, state: req.body.state, zipcode: req.body.zipcode},
-
+            email: req.body.email,
+            username: req.body.username,
+            password: req.body.password,
+            // credentials: { email: req.body.email},
+            address: {street:req.body.street, city: req.body.city, state: req.body.state, zipcode: req.body.zipcode, coord:[{latitude:123, longitude:345}]},
+            // name:{fullname:"Suman"},
+            // credentials:{email: req.body.email, username: req.body.username, password: req.body.password},
+            // address: {street:req.body.street, city: req.body.city, state: req.body.state, zipcode: req.body.zipcode},
+            food_ordered:[
+                {date:2018/1/3,food:{id:"123", cuisine:"Nepal", name:"Suman",price:23},restaurant_used:23},
+                ]
             // state: req.body.state,
             // city: req.body.city,
             // street: req.body.street,
