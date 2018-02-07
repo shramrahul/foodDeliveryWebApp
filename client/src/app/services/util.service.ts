@@ -7,7 +7,7 @@ export class UtilService {
   private _loginUrl: string =this._baseUrl+"login";
   private _registerUrl: string=this._baseUrl+"register";
   private _dashboardUrl: string=this._baseUrl+"dashboard";
-  private _searchUrl: string=this._baseUrl+"search";
+  private _searchUrl: string=this._baseUrl+"restaurant/search";
   private _topResturantsUrl: string=this._baseUrl+"restaurant/get";
   constructor() { }
 

@@ -5,9 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { Response } from '@angular/http/src/static_response';
 import { Http } from '@angular/http';
 import {UtilService} from '../util.service';
-import {Observable} from 'rxjs/Observable';
-import { Observable } from 'rxjs';
+
 import 'rxjs/add/operator/map';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class RestaurantServiceService {
