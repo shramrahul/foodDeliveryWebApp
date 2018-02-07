@@ -21,8 +21,10 @@ export class NavComponent implements OnInit {
   }
 
   OnLogout() {
-    var x = document.getElementById('logoutBtn');
-    x.style.display = 'none';
+   //  var x = document.getElementById('logoutBtn');
+   //  //var y = document.getElementById('loginBtn');
+   //  x.style.display = 'none';
+   // // y.style.display = 'block';
     this.authenticationService.logout();
     this.router.navigate(['/login']);
 

@@ -86,7 +86,9 @@ export class UserDashboardSectionComponent implements OnInit {
   ngOnInit() {
 
     var x = document.getElementById('logoutBtn');
+    var y = document.getElementById('loginBtn');
     x.style.display = 'block';
+    y.style.display = 'none';
 
     this.goForDashBoard();
     this.getTotalCost();

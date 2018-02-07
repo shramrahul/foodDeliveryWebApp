@@ -50,7 +50,7 @@ private http: Http, private utilservice : UtilService) {
         return data;
 
       }else {
-        return "error"; 
+        return "error";
       }
     })
 
