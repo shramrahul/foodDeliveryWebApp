@@ -36,9 +36,9 @@ router.post('/register', function (req, res, next) {
             },
             food_ordered: [
                 {
-                    date: 2018 / 1 / 3,
-                    food: {id: "123", cuisine: "Nepal", name: "Suman", price: 23},
-                    restaurant_used: 23
+                    date: "",
+                    food: {id: " ", cuisine: " ", name: " ", price: " "},
+                    restaurant_used: ""
                 },
             ]
         }
