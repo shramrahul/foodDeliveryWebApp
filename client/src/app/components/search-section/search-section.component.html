@@ -2,7 +2,7 @@
   <!-- Nested Container Starts -->
     <div class="container text-center">
       <h3 class="text-normal">Find the best Restaurants, Cafes &amp; Cuisine in Your Place</h3>
-      
+
       <form class="top-search" [formGroup]="searchForm">
         <div class="input-group-md">
           <div class="input-group-btn search-panel">
@@ -23,20 +23,20 @@
           <div class="form-group">
             <div class="icon-addon addon-lg">
               <label class="fa fa-search"></label>
-              <input type="text" class="form-control input-lg flat" name="search-location" 
+              <input type="text" class="form-control input-lg flat" name="search-location"
               placeholder="Search for a Restaurants, Cafes, Cuisine, etc..,"
               formControlName= "search_key">
             </div>
           </div>
           <span class="input-group-btn">
-            <button class="btn btn-lg btn-secondary animation text-uppercase" 
+            <button class="btn btn-lg btn-secondary animation text-uppercase"
               type="button" (click)="onClickSearch()" [routerLink]="['restaurant-home']">Search</button>
           </span>
 
 
           <span class="input-group-btn">
-              <button class="btn btn-lg btn-secondary animation text-uppercase" 
-                  type="button" (click)="onClickSearch()" >Search NearBy</button>
+              <button class="btn btn-lg btn-secondary animation text-uppercase"
+                  type="button" (click)="onClickSearchNearBy()" >Search NearBy</button>
             </span>
 
         </div>

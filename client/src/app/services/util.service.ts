@@ -7,6 +7,8 @@ export class UtilService {
   private _loginUrl: string =this._baseUrl+"login";
   private _registerUrl: string=this._baseUrl+"register";
   private _dashboardUrl: string=this._baseUrl+"dashboard";
+  private _searchUrl: string=this._baseUrl+"search";
+  private _topResturantsUrl: string=this._baseUrl+"restaurant/get";
   constructor() { }
 
 
@@ -24,5 +26,15 @@ export class UtilService {
 
   get dashboardUrl(): string {
     return this._dashboardUrl;
+  }
+
+
+  get searchUrl(): string {
+    return this._searchUrl;
+  }
+
+
+  get topResturantsUrl(): string {
+    return this._topResturantsUrl;
   }
 }

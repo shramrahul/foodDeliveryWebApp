@@ -17,24 +17,25 @@ export class SearchSectionComponent implements OnInit {
   search_key:String;
   currentLatitude;
   currentLongitude;
+  coordinate:any={};
 
   searchedRestaurant:any;
 
 
 
 
-  constructor(private formBuilder: FormBuilder, 
+  constructor(private formBuilder: FormBuilder,
     private restaurantService:RestaurantServiceService) {
-    
-    
+
+
       this.search_key="";
     this.searchForm= formBuilder.group({
       'search_key':["", [Validators.required]]
     });
 
     this.searchForm.statusChanges.subscribe();
-   
-  
+
+
   }
 
   ngOnInit() {
@@ -46,6 +47,9 @@ export class SearchSectionComponent implements OnInit {
           console.log(position)
           this.currentLatitude= position.coords.latitude;
           this.currentLongitude=position.coords.longitude;
+
+          this.coordinate.latitude =position.coords.latitude;
+          this.coordinate.longitude =position.coords.longitude;
         },
         error => {
           switch (error.code) {
@@ -68,18 +72,32 @@ export class SearchSectionComponent implements OnInit {
 
 /**
  * when the user inputs the name of the restaurant in the search box and clicks the
- * search button then this method is activated. The aim of this method is to search the 
+ * search button then this method is activated. The aim of this method is to search the
  * resturant object that he wants to search
  */
   onClickSearch(){
     this.search_key=this.searchForm.value.search_key;
 
-    this.restaurantService.getSearchRestaurant(this.search_key, this.currentLatitude, this.currentLongitude)
+    this.restaurantService.getSearchRestaurant(this.search_key).subscribe(
+      (res)=>{
+        console.dir(res);
+      }
+    )
+
+  }
+
+  onClickSearchNearBy(){
+
+    this.restaurantService.getNearRestaurant( this.coordinate).subscribe(
+      (res)=>{
+        console.dir(res);
+      }
+    )
 
   }
 
   onClickTopRestaurant(){
-   
+
   }
 
 }

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { DbServiceService } from '../../services/db-services/db-service.service';
+import {Component, OnInit} from '@angular/core';
+import {DbServiceService} from '../../services/db-services/db-service.service';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { RestaurantServiceService } from '../../services/restaurant/restaurant-service.service';
-import { EventEmitter } from '@angular/core';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {RestaurantServiceService} from '../../services/restaurant/restaurant-service.service';
+import {EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-nav',
@@ -13,26 +13,24 @@ import { EventEmitter } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private authenticationService : AuthenticationService, private router :Router) { }
+  constructor(private authenticationService: AuthenticationService, private router: Router, private restaurantService: RestaurantServiceService) {
+  }
 
-  constructor(private dbService:DbServiceService, private restaurantService: RestaurantServiceService ) { }
 
   ngOnInit() {
   }
-  OnLogout(){
-    var x = document.getElementById("logoutBtn");
-    x.style.display = "none";
+
+  OnLogout() {
+    var x = document.getElementById('logoutBtn');
+    x.style.display = 'none';
     this.authenticationService.logout();
     this.router.navigate(['/login']);
 
   }
 
 
-
-
-
-  onClickTopRestaurant(){
-     this.restaurantService.getTopRestaurants();
+  onClickTopRestaurant() {
+    this.restaurantService.getTopRestaurants();
   }
 
 }
