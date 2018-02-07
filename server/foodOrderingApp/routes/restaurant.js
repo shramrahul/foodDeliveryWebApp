@@ -15,12 +15,8 @@ var VerifyToken = require('../auth/VerifyToken');
 //     })
 //   });
 router.get('/get', function (req, res, next) {
-<<<<<<< HEAD
     console.log("i am here");
     restaurants.find({}, (err, food) => {
-=======
-    restaurants.findOne({}, (err, food) => {
->>>>>>> 77e5ad2e3abacc6cc88753af8f4b3fde137241c9
         if (err) res.send(err);
         console.log(food);
         res.send(food);

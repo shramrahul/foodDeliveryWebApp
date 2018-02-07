@@ -3,6 +3,8 @@ import { DbServiceService } from '../../services/db-services/db-service.service'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { RestaurantServiceService } from '../../services/restaurant/restaurant-service.service';
 import { EventEmitter } from '@angular/core';
+import { AuthenticationService } from '../../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -11,13 +13,15 @@ import { EventEmitter } from '@angular/core';
 })
 export class NavComponent implements OnInit {
  
-  constructor(private dbService:DbServiceService, private restaurantService: RestaurantServiceService ) { }
+  constructor(private dbService:DbServiceService,
+     private restaurantService: RestaurantServiceService, 
+      private authenticationService: AuthenticationService,
+      private router:Router
+    ) { }
 
   ngOnInit() {
   }
 
-<<<<<<< HEAD
-=======
   OnLogout() {
    //  var x = document.getElementById('logoutBtn');
    //  //var y = document.getElementById('loginBtn');
@@ -27,7 +31,6 @@ export class NavComponent implements OnInit {
     this.router.navigate(['/login']);
 
   }
->>>>>>> 77e5ad2e3abacc6cc88753af8f4b3fde137241c9
 
  
 

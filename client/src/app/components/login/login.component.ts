@@ -31,14 +31,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-<<<<<<< HEAD
-=======
 
     var x = document.getElementById('logoutBtn');
     var y = document.getElementById('loginBtn');
     x.style.display = 'none';
     y.style.display = 'block';
->>>>>>> 77e5ad2e3abacc6cc88753af8f4b3fde137241c9
   }
 
   onRegister() {

@@ -129,7 +129,9 @@ export class RestaurantHomeSectionComponent implements OnInit {
       this.user.food_ordered.push(food_ordered);
     }
       this.userService.pushData(this.user);
-      this.userService.saveUser(this.user);
+      this.userService.saveUser(this.user).subscribe(next=>{
+        console.dir(next);
+      });;
       this.restaurantService.saveRestaurant(this.restaurant);
      // console.log("after adding order"+this.user.food_ordered)
   }
