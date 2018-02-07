@@ -36,10 +36,7 @@ router.post('/search', function (req, res, next) {
         });
     }else {
        let restaurantsSearchParam = req.body.search;
-        // let restaurantsSearchParam = "/Bata/"
-        console.log(restaurantsSearchParam);
-        // restaurants.find({name: { $regex: restaurantsSearchParam, $options: 'i' }}).limit(5)
-        restaurants.find({name:restaurantsSearchParam}).limit(5)
+        restaurants.find({name: { $regex: restaurantsSearchParam, $options: 'i' }}).limit(5)
             .exec(function (error, restaurants) {
             res.send({restaurants});
         });
