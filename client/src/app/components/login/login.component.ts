@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+
     var x = document.getElementById('logoutBtn');
     var y = document.getElementById('loginBtn');
     x.style.display = 'none';

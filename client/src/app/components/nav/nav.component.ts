@@ -13,7 +13,11 @@ import {Router} from '@angular/router';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private  authenticationService: AuthenticationService,private router:Router,private dbService:DbServiceService, private restaurantService: RestaurantServiceService ) { }
+  constructor(private dbService:DbServiceService,
+     private restaurantService: RestaurantServiceService,
+      private authenticationService: AuthenticationService,
+      private router:Router
+    ) { }
 
   ngOnInit() {
   }

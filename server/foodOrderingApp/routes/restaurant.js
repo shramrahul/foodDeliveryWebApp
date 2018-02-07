@@ -44,7 +44,7 @@ router.post('/search', function (req, res, next) {
         });
     }
 });
-router.put('/:id',VerifyToken, function (req, res, next) {
+router.put('/:id', function (req, res, next) {
     const id = req.params.id;
 
     // console.log(req.body);
