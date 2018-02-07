@@ -15,7 +15,6 @@ var VerifyToken = require('../auth/VerifyToken');
 //     })
 //   });
 router.get('/get', function (req, res, next) {
-    console.log("i am here");
     restaurants.findOne({}, (err, food) => {
         if (err) res.send(err);
         console.log(food);
@@ -42,6 +41,14 @@ router.post('/search', function (req, res, next) {
             res.send({restaurants});
         });
     }
+});
+router.put('/:id', function (req, res, next) {
+    const id = req.params.id;
+    console.log(req.body);
+    restaurants.findByIdAndUpdate(id, req.body, {new: true}, function (err, user) {
+        if (err) return res.status(500).send("There was a problem updating the user.");
+        res.status(200).send(user);
+    })
 });
 
   module.exports = router;

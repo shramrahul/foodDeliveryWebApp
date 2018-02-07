@@ -97,7 +97,7 @@ router.get('/dashboard', VerifyToken, function (req, res, next) {
         });
 });
 
-router.put('/:id', function (req, res, next) {
+router.put('/:id',VerifyToken, function (req, res, next) {
     const id = req.params.id;
     // const doc = {
     //     address: req.body.author,
