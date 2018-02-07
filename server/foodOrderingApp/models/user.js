@@ -32,7 +32,7 @@ var UserSchema = new mongoose.Schema({
 
 
     food_ordered:[
-        {date:Date, food: {id:String, cuisine:String, name:String,price:Number},restaurant_used:Number},
+        {date:String, food: {id:String, cuisine:String, name:String,price:String},restaurant_used:String},
     ]
 
 });
