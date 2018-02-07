@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var restaurants = require('../models/restaurant')
+var VerifyToken = require('../auth/VerifyToken');
 // 
 /* GET home page. */
 // router.post('/createfood', function(req, res, next) {
