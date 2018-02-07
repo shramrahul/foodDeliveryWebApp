@@ -85,7 +85,7 @@ export class UserDashboardSectionComponent implements OnInit {
  * 
  */
   ngOnInit() {
-    //this.goForDashBoard();
+    this.goForDashBoard();
     console.log("**************************************************")
     this.user=this.userService.currentUser;
     this.getTotalCost();
@@ -109,7 +109,7 @@ export class UserDashboardSectionComponent implements OnInit {
   private goForDashBoard() {
     this.authenticationService.dashboard().subscribe(
       data=>{
-        console.log(data.json().user);
+        console.log("_________>>>"+data.json().user);
      this.userService.pushData(data.json().user) ;
       });
   }
