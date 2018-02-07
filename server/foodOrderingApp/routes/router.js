@@ -112,26 +112,8 @@ router.put('/:id', function (req, res, next) {
 });
 
 
-
-
-// app.put('/words/:id', function (req, res) {
-//     console.log(req.params.id + " ----")
-//     const doc = {
-//         author: req.body.author,
-//         quote: req.body.quote,
-//         source: req.body.source,
-//         rating: req.body.rating,
-//         updatedAt: Date.now(),
-//     }
-// Word.update({_id: req.params.id}, doc, function (err, raw) {
-//     if (err) {
-//         res.send(err);
-//     }
-//     res.send(raw);
-// });
-// });
 // GET for logout logout
-router.get('/logout', function (req, res, next) {
+router.get('/logout', VerifyToken, function (req, res, next) {
     if (req.session) {
         // delete session object
         req.session.destroy(function (err) {
