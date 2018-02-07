@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   onRegister() {
@@ -45,7 +46,7 @@ export class LoginComponent implements OnInit {
     this.model.username = this.form.value.email;
     this.model.password = this.form.value.password;
     console.log("test"+ this.model.username + " "+ this.model.password);
-    
+
     this.authenticationService.login(this.model.username, this.model.password)
       .subscribe(result => {
         if (result === true) {

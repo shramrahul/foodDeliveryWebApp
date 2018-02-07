@@ -10,11 +10,12 @@ import {AuthGuard} from './guard/auth.guard';
 const MY_ROUTES: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path:'restaurants', component: RestaurantsSectionComponent},
+  {path:'restaurants', component:RestaurantsSectionComponent},
   {path:'restaurants/restaurant-home/profile', component: UserDashboardSectionComponent},
   {path:'restaurants/restaurant-home', component :RestaurantHomeSectionComponent},
   {path:'profile', component: UserDashboardSectionComponent, canActivate:[AuthGuard]},
-  // {path:'restaurants',component : RestaurantsSectionComponent},
-  {path:'restaurant-home', component :RestaurantHomeSectionComponent}
+  {path:'restaurants',component : RestaurantsSectionComponent},
+  {path:'restaurant-home', component :RestaurantHomeSectionComponent},
+  { path: '**', redirectTo: 'profile' }
 ]
 export const routes = RouterModule.forRoot(MY_ROUTES);

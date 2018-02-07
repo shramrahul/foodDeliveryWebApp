@@ -4,8 +4,10 @@ import { DbServiceService } from '../db-services/db-service.service';
 import { HttpClient } from '@angular/common/http';
 import { Response } from '@angular/http/src/static_response';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
+import {UtilService} from '../util.service';
+
 import 'rxjs/add/operator/map';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class RestaurantServiceService {
@@ -13,7 +15,7 @@ export class RestaurantServiceService {
  value :any;
  pushedData = new EventEmitter<any>();
  constructor( private dbService: DbServiceService, private httpClient :HttpClient,
-private http: Http) {
+private http: Http, private utilservice : UtilService) {
 
  }
 
@@ -33,22 +35,31 @@ private http: Http) {
  }
 
 
- getSearchRestaurant(search_key: String, latitude: Number, longitude:Number){
-  
+  getNearRestaurant(coordinate):Observable<Response>{
+   return this.http.post(this.utilservice.searchUrl, coordinate)
+     .map((response: Response) => {
+       return response;
+     });
  }
 
  getTopRestaurants(): any{
-    return this.http.get("http://localhost:8080/restaurant/get")
+    return this.http.get(this.utilservice.topResturantsUrl)
     .map((data: Response) => {
       if(data.status == 200) {
         console.log(data)
         return data;
-        
+
       }else {
-        return "error";
+        return "error"; 
       }
     })
-    
-    
+
  }
+
+  getSearchRestaurant(search_key: String):Observable<Response> {
+    return this.http.post(this.utilservice.searchUrl, {search:search_key})
+      .map((response: Response) => {
+        return response;
+      });
+  }
 }

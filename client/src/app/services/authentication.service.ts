@@ -27,7 +27,7 @@ export class AuthenticationService {
           // set token property
           this.token = token;
           this.userId =  response.json().user_id;
-          console.log("Login:"+this.token);
+          //console.log("Login:"+this.token);
 
           // store username and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify({userId: this.userId, token: token}));
@@ -41,10 +41,12 @@ export class AuthenticationService {
       });
   }
 
-  register(email: string, username: string, password: string, passwordConf: string): Observable<boolean> {
+  //register(email: string, username: string, password: string, passwordConf: string): Observable<boolean> {
+  register(model): Observable<boolean> {
     //console.log(JSON.stringify({ logemail: username, logpassword: password }));
 
-    return this.http.post(this.utilservice.registerUrl, {email: email, username: username, password: password, passwordConf: passwordConf})
+   // return this.http.post(this.utilservice.registerUrl, {email: email, username: username, password: password, passwordConf: passwordConf})
+    return this.http.post(this.utilservice.registerUrl,  model)
       .map((response: Response) => {
 
         let registered = response.json().auth;
@@ -75,7 +77,7 @@ export class AuthenticationService {
 
   dashboard(): Observable<Response> {
 
-    console.log(this.token+"+++++++++++++++++++++++++++++++++++++++++"+ this.userId)
+    //console.log(this.token+"+++++++++++++++++++++++++++++++++++++++++"+ this.userId)
     let headers = new Headers({'x-access-token': this.token, 'userId':this.userId});
     let options = new RequestOptions({headers: headers});
     return this.http.get(this.utilservice.dashboardUrl, options)
