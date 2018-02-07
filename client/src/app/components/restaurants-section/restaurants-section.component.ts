@@ -20,16 +20,17 @@ export class RestaurantsSectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.restaurants= this.resturantService.getTopRestaurants().subscribe((res) => {
-      if(res == "err" ) {
-        alert("err")
-      }else {
-        this.restaurants = JSON.parse(res._body);
+    // this.restaurants= this.resturantService.getTopRestaurants().subscribe((res) => {
+    //   if(res == "err" ) {
+    //     alert("err")
+    //   }else {
+    //     this.restaurants = JSON.parse(res._body);
         
-      }
-    });
+    //   }
+    // });
      //this.dbService.pushData()
     
+     this.resturantService.value.subscribe(data=>this.restaurants=data);
     console.log('res: ', this.restaurants);
     //this.restaurants=this.dbService.restaurants;
   }

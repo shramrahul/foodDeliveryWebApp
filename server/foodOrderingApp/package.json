@@ -13,7 +13,7 @@
     "express": "^4.15.2",
     "express-session": "^1.15.2",
     "jsonwebtoken": "^7.4.1",
-    "mongoose": "^4.9.8",
+    "mongoose": "^4.13.10",
     "nodemon": "^1.14.12",
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.1",

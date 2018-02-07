@@ -12,6 +12,8 @@ import { RestaurantServiceService } from '../../services/restaurant/restaurant-s
 export class SearchSectionComponent implements OnInit {
 
 
+  searchedResult;
+
 
   searchForm: FormGroup;
   search_key:String;
@@ -73,13 +75,16 @@ export class SearchSectionComponent implements OnInit {
  */
   onClickSearch(){
     this.search_key=this.searchForm.value.search_key;
+    if(this.search_key===null) return;
 
-    this.restaurantService.getSearchRestaurant(this.search_key, this.currentLatitude, this.currentLongitude)
+    this.restaurantService.getSearchRestaurant(this.search_key).subscribe(
+      
+      data=>{
+        console.dir(data[0].name)
+        this.searchedRestaurant=data[0]
+      }
+    );
+    
 
   }
-
-  onClickTopRestaurant(){
-   
-  }
-
 }

@@ -20,7 +20,7 @@ export class NavComponent implements OnInit {
  
 
   onClickTopRestaurant(){
-     this.restaurantService.getTopRestaurants(); 
+     this.restaurantService.pushData(this.restaurantService.getTopRestaurants());
   }
 
 }

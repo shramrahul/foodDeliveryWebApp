@@ -2,6 +2,8 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { DbServiceService } from '../db-services/db-service.service';
 import { AuthenticationService } from '../authentication.service';
 import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { Response } from '@angular/http';
 
 
 @Injectable()
@@ -89,8 +91,32 @@ export class UserServiceService {
 
 
 // User is updated to the database.
- saveUser(user){
+//  saveUser(user):void{
+//    console.log("inside saveUser")
+//    console.dir(user)
+//    const id=this.authenticationService.userId;
+//     this.http.put("http://localhost:8080/"+id , user )
+//    .map((response: Response) => {
+//     console.log("---------->>>============="+response.json())
+//   });
+// }
+
+
+saveUser(user):Observable<Boolean>{
+  console.log("inside saveUser")
+  console.dir(user)
   
- }
+  const id=this.authenticationService.userId;
+  const url="http://localhost:8080/router/"+id;
+  console.log("url==========="+ url)
+  console.log("userId "+id);
+  return this.http.put( url, {username:"shreeram", email:"abc@abc"} )
+  .map((response: Response) => {
+   console.log("---------->>>============="+response.json())
+    return true;
+  });
+}
+
+
 
 }

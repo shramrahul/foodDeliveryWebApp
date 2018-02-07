@@ -23,6 +23,7 @@ router.get('/get', function (req, res, next) {
 
     })
 });
+
 router.post('/search', function (req, res, next) {
     if(req.body.latitude && req.body.longitude) {
         let latitude = req.body.latitude;
