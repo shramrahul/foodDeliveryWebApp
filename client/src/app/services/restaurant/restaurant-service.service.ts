@@ -51,4 +51,11 @@ private http: Http) {
     
     
  }
+
+
+ //save restaurant to database on checkout
+ saveRestaurant(restaurant:any){
+   
+ }
+
 }

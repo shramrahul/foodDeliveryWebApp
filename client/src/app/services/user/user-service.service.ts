@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { DbServiceService } from '../db-services/db-service.service';
 import { AuthenticationService } from '../authentication.service';
+import { Http } from '@angular/http';
 
 
 @Injectable()
@@ -12,9 +13,11 @@ export class UserServiceService {
 
   pushedData= new EventEmitter<any>();
   constructor (dbService:DbServiceService,
-    private authenticationService: AuthenticationService) { 
+    private authenticationService: AuthenticationService,
+    private http: Http
+  ) { 
    
-
+     
       console.log("current user in userservice constructor "+this.currentUser)
 
   //   this.currentUser={
@@ -80,8 +83,14 @@ export class UserServiceService {
     
     // this.pushedData.emit( data.json().user )
   });
-  console.log("currentUser in userService"+this.currentUser)
+  console.log("currentUser in userService" +this.currentUser)
  
+ }
+
+
+// User is updated to the database.
+ saveUser(user){
+  
  }
 
 }

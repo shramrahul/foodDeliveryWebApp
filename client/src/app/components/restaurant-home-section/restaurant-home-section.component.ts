@@ -42,24 +42,12 @@ export class RestaurantHomeSectionComponent implements OnInit {
     this.reviewForm.statusChanges.subscribe();
     
     this.currentReview={
-      "user":"", 
-      "restaurant_id":"", 
-      "review":"",
-      "date":""
+      "username":"", 
+      "comment":"", 
+      "rating":"",
     }
 
-    this.reviews=[
-      {"user":"Shreedhar", 
-        "restaurant_id":"23456", 
-        "review":"this is the best resurant ever seen in the town",
-        "date":"10/10/2017"
-      },
-      {"user":"suman", 
-        "restaurant_id":"898778", 
-        "review":"cool food and i loved it",
-        "date":"10/10/2017"
-      }
-    ]
+    this.reviews=this.restaurant.reviews;
   
   }
 
@@ -112,10 +100,9 @@ export class RestaurantHomeSectionComponent implements OnInit {
 
   onReviewPost(){
 
-    this.currentReview.review= this.reviewForm.value.review;
-    this.currentReview.user=this.user.name;
-    this.currentReview.restaurant_id= this.restaurant.name;
-    this.currentReview.date= new Date();
+    this.currentReview.comment= this.reviewForm.value.review;
+    this.currentReview.username=this.user.username;
+    this.currentReview.rating=3.5;
 
 
       setTimeout(() => {
@@ -127,9 +114,9 @@ export class RestaurantHomeSectionComponent implements OnInit {
   }
 
   onCheckout(){
-
+    //console.log("inside checkout")
    this.userService.pushData(this.user);
-    console.log("before adding order"+this.user.food_ordered)
+   // console.log("before adding order"+this.user.food_ordered)
 
     for (var order of this.cart){
 
@@ -139,12 +126,12 @@ export class RestaurantHomeSectionComponent implements OnInit {
         restaurant_used: this.restaurant.name
        
       }
-
       this.user.food_ordered.push(food_ordered);
     }
-    
       this.userService.pushData(this.user);
-      console.log("after adding order"+this.user.food_ordered)
+      this.userService.saveUser(this.user);
+      this.restaurantService.saveRestaurant(this.restaurant);
+     // console.log("after adding order"+this.user.food_ordered)
   }
 
 }

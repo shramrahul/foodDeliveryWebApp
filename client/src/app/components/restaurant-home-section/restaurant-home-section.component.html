@@ -150,8 +150,8 @@
                     <div class="review-list">
                       <div class="clearfix">
                         <div class="pull-left">
-                          <h6><i class="fa fa-calendar"></i> {{rev.date | date:"MM/dd/yyyy"}}</h6>
-                          <h6>{{rev.user}}</h6>
+                          <!-- <h6><i class="fa fa-calendar"></i> {{rev.date | date:"MM/dd/yyyy"}}</h6> -->
+                          <h6>{{rev.username}}</h6>
                           <ul class="list-unstyled list-inline rating-star-list">
                             <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star"></i></li>
@@ -163,7 +163,11 @@
                       
                       </div>
                       <div class="review-list-content">
-                        <p>{{rev.review}}</p>
+                        <p>{{rev.comment}}</p>
+                      </div>
+
+                      <div class="review-list-content">
+                        <p>{{rev.rating}}</p>
                       </div>
                     </div>
                   <!-- Review #1 Ends -->
