@@ -6,6 +6,8 @@ import { Response } from '@angular/http/src/static_response';
 import { Http } from '@angular/http';
 import {UtilService} from '../util.service';
 import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class RestaurantServiceService {
@@ -40,12 +42,16 @@ private http: Http, private utilservice : UtilService) {
      });
  }
 
- getTopRestaurants(){
-    (this.http.get(this.utilservice.topResturantsUrl))
-    .map((data: Response) => data.json())
-    .subscribe((x)=>{
-    this.value=x;
-    console.log(this.value)
+ getTopRestaurants(): any{
+    return this.http.get(this.utilservice.topResturantsUrl)
+    .map((data: Response) => {
+      if(data.status == 200) {
+        console.log(data)
+        return data;
+
+      }else {
+        return "error";
+      }
     })
 
  }

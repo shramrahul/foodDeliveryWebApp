@@ -70,7 +70,9 @@ export class DbServiceService {
   
   getTheCurrentSessionOfLoggedUser(){
     this.authenticationService.dashboard().subscribe(data=>{
-      console.log("user in dbService "+data.json().user)
+      console.log("user in dbService "+ data.json().user)
+
+      
       this.pushedData.emit( data.json().user )
     });
      // return this.user;
