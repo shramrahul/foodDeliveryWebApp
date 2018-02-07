@@ -23,16 +23,27 @@ router.get('/get', function (req, res, next) {
     })
 });
 router.post('/search', function (req, res, next) {
-    let latitude = req.body.latitude;
-    let longitude = req.body.longitude;
-    restaurants.find({
-        location: {
-            '$near': [longitude, latitude],
-            '$maxDistance': 1000 / 6371
-        }
-    }).limit(5).exec(function (error, restaurants) {
-        res.send({restaurants});
-    });
-
+    if(req.body.latitude && req.body.longitude) {
+        let latitude = req.body.latitude;
+        let longitude = req.body.longitude;
+        restaurants.find({
+            location: {
+                '$near': [longitude, latitude],
+                '$maxDistance': 1000 / 6371
+            }
+        }).limit(5).exec(function (error, restaurants) {
+            res.send({restaurants});
+        });
+    }else {
+       let restaurantsSearchParam = req.body.search;
+        // let restaurantsSearchParam = "/Bata/"
+        console.log(restaurantsSearchParam);
+        // restaurants.find({name: { $regex: restaurantsSearchParam, $options: 'i' }}).limit(5)
+        restaurants.find({name:restaurantsSearchParam}).limit(5)
+            .exec(function (error, restaurants) {
+            res.send({restaurants});
+        });
+    }
 });
+
   module.exports = router;
