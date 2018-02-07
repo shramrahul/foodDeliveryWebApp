@@ -16,6 +16,18 @@ export class NavComponent implements OnInit {
   ngOnInit() {
   }
 
+<<<<<<< HEAD
+=======
+  OnLogout() {
+   //  var x = document.getElementById('logoutBtn');
+   //  //var y = document.getElementById('loginBtn');
+   //  x.style.display = 'none';
+   // // y.style.display = 'block';
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
+
+  }
+>>>>>>> 77e5ad2e3abacc6cc88753af8f4b3fde137241c9
 
  
 

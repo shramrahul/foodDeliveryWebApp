@@ -22,9 +22,8 @@ export class LoginComponent implements OnInit {
               private authenticationService: AuthenticationService) {
     this.form = formBuilder.group({
       'password': ['', [Validators.required]],
-      'email': ['', [Validators.required
-        //,
-       // Validators.pattern('[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?')
+      'email': ['', [Validators.required,
+        Validators.pattern('[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?')
       ]],
     });
 
@@ -32,6 +31,14 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+<<<<<<< HEAD
+=======
+
+    var x = document.getElementById('logoutBtn');
+    var y = document.getElementById('loginBtn');
+    x.style.display = 'none';
+    y.style.display = 'block';
+>>>>>>> 77e5ad2e3abacc6cc88753af8f4b3fde137241c9
   }
 
   onRegister() {
@@ -40,14 +47,14 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
    // this.router.navigate(['/profile']);
-
+    this.error ='';
     this.loading = true;
     this.model.username = this.form.value.email;
     this.model.password = this.form.value.password;
     console.log("test"+ this.model.username + " "+ this.model.password);
     
     this.authenticationService.login(this.model.username, this.model.password)
-      .subscribe(result => {
+      .subscribe((result) => {
         if (result === true) {
           console.log(result);
           this.router.navigate(['/profile']);
@@ -55,6 +62,8 @@ export class LoginComponent implements OnInit {
           this.error = 'Username or password is incorrect';
           this.loading = false;
         }
+      },(error) => {
+        this.error = 'Username or password is incorrect';
       });
   }
 }

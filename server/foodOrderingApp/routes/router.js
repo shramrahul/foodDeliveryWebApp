@@ -36,9 +36,9 @@ router.post('/register', function (req, res, next) {
             },
             food_ordered: [
                 {
-                    date: 2018 / 1 / 3,
-                    food: {id: "123", cuisine: "Nepal", name: "Suman", price: 23},
-                    restaurant_used: 23
+                    date: "",
+                    food: {id: " ", cuisine: " ", name: " ", price: " "},
+                    restaurant_used: ""
                 },
             ]
         }
@@ -97,7 +97,11 @@ router.get('/dashboard', VerifyToken, function (req, res, next) {
         });
 });
 
+<<<<<<< HEAD
 router.put('/router/:id', function (req, res, next) {
+=======
+router.put('/:id',VerifyToken, function (req, res, next) {
+>>>>>>> 77e5ad2e3abacc6cc88753af8f4b3fde137241c9
     const id = req.params.id;
     // const doc = {
     //     address: req.body.author,

@@ -85,6 +85,15 @@ export class UserDashboardSectionComponent implements OnInit {
  * 
  */
   ngOnInit() {
+<<<<<<< HEAD
+=======
+
+    var x = document.getElementById('logoutBtn');
+    var y = document.getElementById('loginBtn');
+    x.style.display = 'block';
+    y.style.display = 'none';
+
+>>>>>>> 77e5ad2e3abacc6cc88753af8f4b3fde137241c9
     this.goForDashBoard();
     console.log("**************************************************")
     this.user=this.userService.currentUser;
