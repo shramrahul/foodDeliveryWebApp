@@ -13,10 +13,10 @@ export class RestaurantsSectionComponent implements OnInit {
 
   private restaurants ;
   currentRes;
-  
-  constructor(private dbService :DbServiceService, 
-    private resturantService: RestaurantServiceService) { 
-   
+
+  constructor(private dbService :DbServiceService,
+    private resturantService: RestaurantServiceService) {
+
   }
 
   ngOnInit() {
@@ -25,11 +25,11 @@ export class RestaurantsSectionComponent implements OnInit {
     //     alert("err")
     //   }else {
     //     this.restaurants = JSON.parse(res._body);
-        
+
     //   }
     // });
      //this.dbService.pushData()
-    
+    console.log("restaurants"+this.resturantService.value);
      this.resturantService.value.subscribe(data=>this.restaurants=data);
     console.log('res: ', this.restaurants);
     //this.restaurants=this.dbService.restaurants;

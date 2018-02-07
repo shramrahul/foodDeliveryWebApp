@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {FormGroup, FormControl, Validators, FormBuilder, FormArray} from '@angular/forms';
 import {UtilService} from '../../services/util.service';
 import {AuthenticationService} from '../../services/authentication.service';
+import {Response} from '@angular/http';
 
 @Component({
   selector: 'app-login',
@@ -31,14 +32,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-<<<<<<< HEAD
-=======
-
     var x = document.getElementById('logoutBtn');
     var y = document.getElementById('loginBtn');
     x.style.display = 'none';
     y.style.display = 'block';
->>>>>>> 77e5ad2e3abacc6cc88753af8f4b3fde137241c9
   }
 
   onRegister() {
@@ -52,7 +49,7 @@ export class LoginComponent implements OnInit {
     this.model.username = this.form.value.email;
     this.model.password = this.form.value.password;
     console.log("test"+ this.model.username + " "+ this.model.password);
-    
+
     this.authenticationService.login(this.model.username, this.model.password)
       .subscribe((result) => {
         if (result === true) {
@@ -66,4 +63,5 @@ export class LoginComponent implements OnInit {
         this.error = 'Username or password is incorrect';
       });
   }
+
 }

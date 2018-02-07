@@ -5,6 +5,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { DbServiceService } from '../../services/db-services/db-service.service';
+import {UtilService} from '../../services/util.service';
+import {AuthenticationService} from '../../services/authentication.service';
 
 
 @Component({
@@ -13,7 +15,7 @@ import { DbServiceService } from '../../services/db-services/db-service.service'
   styleUrls: ['./restaurant-home-section.component.css']
 })
 export class RestaurantHomeSectionComponent implements OnInit {
-  
+
   private restaurant;
   private user: any;
   cart=[];
@@ -27,10 +29,11 @@ export class RestaurantHomeSectionComponent implements OnInit {
   constructor( private restaurantService: RestaurantServiceService,
                private dbService:DbServiceService ,
             private userService :UserServiceService,
-            private formBuilder: FormBuilder
+            private formBuilder: FormBuilder,
+               private authService: AuthenticationService
           ) {
 
-    this.cart=[]; 
+    this.cart=[];
     this.total=5;
     this.restaurant=restaurantService.value;
     console.log(this.restaurant)
@@ -38,25 +41,25 @@ export class RestaurantHomeSectionComponent implements OnInit {
     this.reviewForm= formBuilder.group({
       'review':["", [Validators.required]]
     });
-    
+
     this.reviewForm.statusChanges.subscribe();
-    
+
     this.currentReview={
-      "username":"", 
-      "comment":"", 
+      "username":"",
+      "comment":"",
       "rating":"",
     }
 
     this.reviews=this.restaurant.reviews;
-  
+
   }
 
- 
-
-  
 
 
-  
+
+
+
+
 
   addToCart(food){
     console.log("adding in cart"+food)
@@ -66,15 +69,15 @@ export class RestaurantHomeSectionComponent implements OnInit {
             }, 500);
   }
 
-  
+
   removeFromCart(f){
     for(var food of this.cart){
       if(f.id==food.id) {
         setTimeout(() => {
           this.cart.splice(this.cart.indexOf(food),1);
-              this.total-=food.price; 
+              this.total-=food.price;
         }, 500);
-        break;    
+        break;
       }
     }
   }
@@ -84,7 +87,7 @@ export class RestaurantHomeSectionComponent implements OnInit {
   ngOnInit() {
     this.restaurantService.pushedData.subscribe(data=> this.restaurant=data );
     this.restaurantService.getRestaurant();
-    
+
     // this.userService.pushedData.subscribe(data=> {
     //   console.log("user in restaurant home >"+data)
     //   this.user= data});
@@ -94,7 +97,7 @@ export class RestaurantHomeSectionComponent implements OnInit {
       console.log("user in restaurant home >"+data)
       this.user= data});
     this.dbService.getTheCurrentSessionOfLoggedUser();
-    
+
   }
 
 
@@ -106,11 +109,11 @@ export class RestaurantHomeSectionComponent implements OnInit {
 
 
       setTimeout(() => {
-        
+
         this.reviews.push(this.currentReview);
         console.log(this.reviews)
       }, 1000);
-      
+
   }
 
   onCheckout(){
@@ -124,13 +127,18 @@ export class RestaurantHomeSectionComponent implements OnInit {
         date : Date.now(),
         food: order,
         restaurant_used: this.restaurant.name
-       
+
       }
       this.user.food_ordered.push(food_ordered);
     }
       this.userService.pushData(this.user);
-      this.userService.saveUser(this.user);
-      this.restaurantService.saveRestaurant(this.restaurant);
+      this.userService.saveUser(this.user).subscribe(next=>{
+        console.dir(next);
+      });
+      //   this.authService.saveUser(this.user).subscribe(next=>{
+      //     console.dir(next);
+      //   });
+      // this.restaurantService.saveRestaurant(this.restaurant);
      // console.log("after adding order"+this.user.food_ordered)
   }
 

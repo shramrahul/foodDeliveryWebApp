@@ -15,14 +15,10 @@ var VerifyToken = require('../auth/VerifyToken');
 //     })
 //   });
 router.get('/get', function (req, res, next) {
-<<<<<<< HEAD
-    console.log("i am here");
+    // console.log("i am here");
     restaurants.find({}, (err, food) => {
-=======
-    restaurants.findOne({}, (err, food) => {
->>>>>>> 77e5ad2e3abacc6cc88753af8f4b3fde137241c9
         if (err) res.send(err);
-        console.log(food);
+        // console.log(food);
         res.send(food);
 
     })
@@ -48,9 +44,10 @@ router.post('/search', function (req, res, next) {
         });
     }
 });
-router.put('/:id', function (req, res, next) {
+router.put('/:id',VerifyToken, function (req, res, next) {
     const id = req.params.id;
-    console.log(req.body);
+
+    // console.log(req.body);
     restaurants.findByIdAndUpdate(id, req.body, {new: true}, function (err, user) {
         if (err) return res.status(500).send("There was a problem updating the user.");
         res.status(200).send(user);

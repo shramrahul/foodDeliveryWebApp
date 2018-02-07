@@ -65,10 +65,10 @@ export class UserDashboardSectionComponent implements OnInit {
               private formBuilder: FormBuilder,
               private router: Router,
               private authenticationService: AuthenticationService,
-            private userService: UserServiceService) { 
+            private userService: UserServiceService) {
                 this.totalCost=0;
                 this.totalOrders=0;
-                
+
                 //this.user=userService.currentUser;
                 console.log("dashboard------"+this.user)
                 // userService.pushedData.subscribe(data=>this.user=data);
@@ -77,23 +77,20 @@ export class UserDashboardSectionComponent implements OnInit {
 
 
 /**
- * firstly, this method subscribs to the pushedData variable of the userService then it 
+ * firstly, this method subscribs to the pushedData variable of the userService then it
  * calls the getUser() method of the UserService.
- *  
- * Then it calls the getTotalCosts() of this class where it calculates the total cost of the 
- * food in the user object  
- * 
+ *
+ * Then it calls the getTotalCosts() of this class where it calculates the total cost of the
+ * food in the user object
+ *
  */
   ngOnInit() {
-<<<<<<< HEAD
-=======
 
     var x = document.getElementById('logoutBtn');
     var y = document.getElementById('loginBtn');
     x.style.display = 'block';
     y.style.display = 'none';
 
->>>>>>> 77e5ad2e3abacc6cc88753af8f4b3fde137241c9
     this.goForDashBoard();
     console.log("**************************************************")
     this.user=this.userService.currentUser;
@@ -104,7 +101,7 @@ export class UserDashboardSectionComponent implements OnInit {
   /**
    * current user object consists of the array of the orders. each order consists
    * of the food that he ordered. so this method calculates the total cost of the food
-   * that the user has ordered 
+   * that the user has ordered
    */
   getTotalCost(){
     console.log("her===============================e"+this.user)

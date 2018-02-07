@@ -35,21 +35,22 @@ private http: Http, private utilservice :UtilService) {
  }
 
 
- 
+
 
  getTopRestaurants(): any{
     return this.http.get("http://localhost:8080/restaurant/get")
     .map((data: Response) => {
+      console.log("i am heretop");
       if(data.status == 200) {
         console.log(data.json())
         return data.json();
-        
+
       }else {
         return "error";
       }
     })
-    
-    
+
+
  }
 
 
@@ -66,11 +67,11 @@ private http: Http, private utilservice :UtilService) {
 getSearchRestaurant(search_key: String):Observable<any> {
   return this.http.post(this.utilservice.searchUrl, {search:search_key})
     .map((data: Response) => {
-      
+
       if(data.status == 200) {
         console.log(data.json().restaurants)
         return data.json().restaurants;
-        
+
       }else {
         return "error";
       }
@@ -81,7 +82,7 @@ getSearchRestaurant(search_key: String):Observable<any> {
 
  //save restaurant to database on checkout
  saveRestaurant(restaurant:any){
-   
+
  }
 
 }

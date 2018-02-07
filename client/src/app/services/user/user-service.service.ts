@@ -9,17 +9,17 @@ import { Response } from '@angular/http';
 @Injectable()
 export class UserServiceService {
 
-  
+
    currentUser;
-  
+
 
   pushedData= new EventEmitter<any>();
   constructor (dbService:DbServiceService,
     private authenticationService: AuthenticationService,
     private http: Http
-  ) { 
-   
-     
+  ) {
+
+
       console.log("current user in userservice constructor "+this.currentUser)
 
   //   this.currentUser={
@@ -68,7 +68,7 @@ export class UserServiceService {
 
   /**
    * this method is used to assign the value to the class variable currentUser
-   * @param value 
+   * @param value
    */
  pushData(value:any){
    //console.log( value)
@@ -81,12 +81,12 @@ export class UserServiceService {
  getUser(){
   this.authenticationService.dashboard().subscribe(data=>{
     this.currentUser=data.json().user
-    
-    
+
+
     // this.pushedData.emit( data.json().user )
   });
   console.log("currentUser in userService" +this.currentUser)
- 
+
  }
 
 
@@ -105,9 +105,10 @@ export class UserServiceService {
 saveUser(user):Observable<Boolean>{
   console.log("inside saveUser")
   console.dir(user)
-  
+
   const id=this.authenticationService.userId;
-  const url="http://localhost:8080/router/"+id;
+  let url = "http://localhost:8080/update/"+id;
+  // const url="http://localhost:8080/router/"+id;
   console.log("url==========="+ url)
   console.log("userId "+id);
   return this.http.put( url, {username:"shreeram", email:"abc@abc"} )

@@ -41,10 +41,10 @@ export class AuthenticationService {
       });
   }
 
-  register(email: string, username: string, password: string, passwordConf: string): Observable<boolean> {
+  // register(email: string, username: string, password: string, passwordConf: string): Observable<boolean> {
     //console.log(JSON.stringify({ logemail: username, logpassword: password }));
-
-    return this.http.post(this.utilservice.registerUrl, {email: email, username: username, password: password, passwordConf: passwordConf})
+register(model):Observable<boolean>{
+    return this.http.post(this.utilservice.registerUrl, {model})
       .map((response: Response) => {
 
         let registered = response.json().auth;
@@ -81,6 +81,22 @@ export class AuthenticationService {
     return this.http.get(this.utilservice.dashboardUrl, options)
       .map((response: Response) => {
       // console.log( JSON.stringify(response));
+        return response;
+      });
+  }
+
+  saveUser(user):Observable<Response>{
+    console.log("inside saveUser")
+    console.dir(user)
+
+    const id=this.userId;
+    let url = "http://localhost:8080/update/"+this.userId;
+    // const url="http://localhost:8080/router/"+id;
+    console.log("url==========="+ url)
+    console.log("userId "+id);
+    return this.http.put( url, user)
+      .map((response: Response) => {
+        console.log("---------->>>============="+response.json())
         return response;
       });
   }

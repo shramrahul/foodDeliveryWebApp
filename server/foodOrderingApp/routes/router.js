@@ -97,17 +97,14 @@ router.get('/dashboard', VerifyToken, function (req, res, next) {
         });
 });
 
-<<<<<<< HEAD
-router.put('/router/:id', function (req, res, next) {
-=======
-router.put('/:id',VerifyToken, function (req, res, next) {
->>>>>>> 77e5ad2e3abacc6cc88753af8f4b3fde137241c9
+router.put('/update/:id', function (req, res, next) {
     const id = req.params.id;
     // const doc = {
     //     address: req.body.author,
     //     username: req.body.quote,
     //     email: req.body.source,
     // }
+    console.log("i am router put===================="+ id);
     console.log(req.body);
     User.findByIdAndUpdate(id, req.body, {new: true}, function (err, user) {
         if (err) return res.status(500).send("There was a problem updating the user.");
