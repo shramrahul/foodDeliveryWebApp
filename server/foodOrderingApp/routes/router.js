@@ -17,6 +17,7 @@ router.get('/', function (req, res, next) {
 
 //POST route for updating data
 router.post('/register', function (req, res, next) {
+    console.log(req.body)
     if (req.body.email &&
         req.body.username &&
         req.body.password &&

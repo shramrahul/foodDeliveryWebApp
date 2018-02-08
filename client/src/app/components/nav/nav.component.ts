@@ -22,7 +22,7 @@ export class NavComponent implements OnInit {
   ngOnInit() {
   }
 
-  OnLogout() {
+  onLogout() {
    //  var x = document.getElementById('logoutBtn');
    //  //var y = document.getElementById('loginBtn');
    //  x.style.display = 'none';

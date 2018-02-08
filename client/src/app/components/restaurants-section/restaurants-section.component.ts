@@ -24,13 +24,17 @@ export class RestaurantsSectionComponent implements OnInit {
     //   if(res == "err" ) {
     //     alert("err")
     //   }else {
+    //     //console.dir("res section->>>>> " +this.restaurants  );
     //     this.restaurants = JSON.parse(res._body);
-
+           
     //   }
     // });
+
+    this.resturantService.getTopRestaurants().subscribe(data=>this.restaurants=data)
+
      //this.dbService.pushData()
-    console.log("restaurants"+this.resturantService.value);
-     this.resturantService.value.subscribe(data=>this.restaurants=data);
+    //console.log("restaurants"+this.resturantService.value);
+     //this.resturantService.value.subscribe(data=>this.restaurants=data);
     console.log('res: ', this.restaurants);
     //this.restaurants=this.dbService.restaurants;
   }

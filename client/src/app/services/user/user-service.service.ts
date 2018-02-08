@@ -20,6 +20,7 @@ export class UserServiceService {
   ) {
 
 
+   // this.getUser();
       console.log("current user in userservice constructor "+this.currentUser)
 
   //   this.currentUser={
@@ -71,7 +72,7 @@ export class UserServiceService {
    * @param value
    */
  pushData(value:any){
-   //console.log( value)
+   console.log("in user service"+ value)
   this.currentUser=value;
  }
 
@@ -83,7 +84,7 @@ export class UserServiceService {
     this.currentUser=data.json().user
 
 
-    // this.pushedData.emit( data.json().user )
+   //  this.pushedData.emit( data.json().user )
   });
   console.log("currentUser in userService" +this.currentUser)
 
@@ -105,13 +106,13 @@ export class UserServiceService {
 saveUser(user):Observable<Boolean>{
   console.log("inside saveUser")
   console.dir(user)
-
+  const query =this.currentUser;
   const id=this.authenticationService.userId;
   let url = "http://localhost:8080/update/"+id;
   // const url="http://localhost:8080/router/"+id;
   console.log("url==========="+ url)
   console.log("userId "+id);
-  return this.http.put( url, {username:"shreeram", email:"abc@abc"} )
+  return this.http.put( url, query )
   .map((response: Response) => {
    console.log("---------->>>============="+response.json())
     return true;

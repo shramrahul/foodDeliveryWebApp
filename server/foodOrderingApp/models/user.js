@@ -8,18 +8,18 @@ var UserSchema = new mongoose.Schema({
     email: {
         type: String,
         unique: true,
-        required: true,
+        required: false,
         trim: true
     },
     username: {
         type: String,
         unique: true,
-        required: true,
+        required: false,
         trim: true
     },
     password: {
         type: String,
-        required: true
+        required: false
     },
 
     address: {

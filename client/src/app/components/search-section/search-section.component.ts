@@ -87,4 +87,18 @@ export class SearchSectionComponent implements OnInit {
     
 
   }
+
+
+  onClickSearchNearBy(){
+    var coord= [this.currentLatitude, this.currentLongitude]
+    this.restaurantService.getNearRestaurant(coord).subscribe(
+      
+      data=>{
+        console.log("NearBy Restaurants");
+        console.log(data)
+      }
+    )
+  }
+
+
 }

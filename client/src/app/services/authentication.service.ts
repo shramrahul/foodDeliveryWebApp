@@ -44,7 +44,9 @@ export class AuthenticationService {
   // register(email: string, username: string, password: string, passwordConf: string): Observable<boolean> {
     //console.log(JSON.stringify({ logemail: username, logpassword: password }));
 register(model):Observable<boolean>{
-    return this.http.post(this.utilservice.registerUrl, {model})
+
+  console.log("print"+ JSON.stringify(model))
+    return this.http.post(this.utilservice.registerUrl, model)
       .map((response: Response) => {
 
         let registered = response.json().auth;

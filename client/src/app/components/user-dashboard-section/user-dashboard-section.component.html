@@ -63,7 +63,7 @@
                         <tr *ngFor="let rec of user.food_ordered">
                               <td>{{rec.food.name}}</td>
                               <td>{{rec.restaurant_used}}</td>
-                              <td>{{rec.date}}</td>
+                              <td>{{rec.date | date: "MM/dd/yyy"}}</td>
                               <td>{{rec.food.price}}</td>
                               
                         </tr>

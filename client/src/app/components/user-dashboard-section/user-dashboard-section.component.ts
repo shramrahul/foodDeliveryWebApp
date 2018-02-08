@@ -69,10 +69,10 @@ export class UserDashboardSectionComponent implements OnInit {
                 this.totalCost=0;
                 this.totalOrders=0;
 
-                //this.user=userService.currentUser;
-                console.log("dashboard------"+this.user)
+                 this.user=userService.currentUser;
+                // console.log("dashboard------"+this.user)
                 // userService.pushedData.subscribe(data=>this.user=data);
-                // this.userService.getUser();
+                //  this.userService.getUser();
               }
 
 
@@ -107,7 +107,7 @@ export class UserDashboardSectionComponent implements OnInit {
     console.log("her===============================e"+this.user)
     for (var cos in this.user.food_ordered){
       console.log("price="+this.user.food_ordered[cos].food.price)
-      this.totalCost+= (this.user.food_ordered[cos].food.price);
+      this.totalCost+= Number(this.user.food_ordered[cos].food.price);
       this.totalOrders++;
    }
   }
@@ -115,7 +115,7 @@ export class UserDashboardSectionComponent implements OnInit {
   private goForDashBoard() {
     this.authenticationService.dashboard().subscribe(
       data=>{
-        console.log("_________>>>"+data.json().user);
+        //  this.user=data.json().user;
      this.userService.pushData(data.json().user) ;
       });
   }

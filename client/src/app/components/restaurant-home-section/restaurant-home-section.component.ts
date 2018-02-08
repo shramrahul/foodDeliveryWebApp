@@ -93,6 +93,9 @@ export class RestaurantHomeSectionComponent implements OnInit {
     //   this.user= data});
     // this.userService.getUser();
 
+    this.user= this.userService.currentUser;
+    console.log("user in restaurant home "+this.user)
+
     this.dbService.pushedData.subscribe(data=> {
       console.log("user in restaurant home >"+data)
       this.user= data});
@@ -117,6 +120,7 @@ export class RestaurantHomeSectionComponent implements OnInit {
   }
 
   onCheckout(){
+    console.log("user->>>"+ this.user)
     //console.log("inside checkout")
    this.userService.pushData(this.user);
    // console.log("before adding order"+this.user.food_ordered)
@@ -131,6 +135,8 @@ export class RestaurantHomeSectionComponent implements OnInit {
       }
       this.user.food_ordered.push(food_ordered);
     }
+
+    
       this.userService.pushData(this.user);
       this.userService.saveUser(this.user).subscribe(next=>{
         console.dir(next);
