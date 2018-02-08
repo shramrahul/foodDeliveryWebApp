@@ -37,6 +37,10 @@ private http: Http, private utilservice :UtilService) {
 
 
 
+ /**@author shreeram
+  * the list of hre top restaurants are collected by hitting the surver urland returned 
+  as the json
+  */
  getTopRestaurants(): any{
     return this.http.get("http://localhost:8080/restaurant/get")
     .map((data: Response) => {

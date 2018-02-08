@@ -61,6 +61,14 @@ export class UserDashboardSectionComponent implements OnInit {
   // }
 
   user;
+
+
+  /**@author shreeram
+   *  UtilService, FormBuilder, Router, AuthenticationService, UserServiceService are 
+   * injected in the class through constructor. current user from userService is grabbed and 
+   * assigned to the class variable, user
+   * 
+   */
   constructor(private myHttpService: UtilService,
               private formBuilder: FormBuilder,
               private router: Router,
@@ -98,7 +106,7 @@ export class UserDashboardSectionComponent implements OnInit {
   }
 
 
-  /**
+  /**@author shreeram
    * current user object consists of the array of the orders. each order consists
    * of the food that he ordered. so this method calculates the total cost of the food
    * that the user has ordered

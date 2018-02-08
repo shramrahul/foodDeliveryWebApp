@@ -33,7 +33,10 @@ export class NavComponent implements OnInit {
   }
 
 
-
+/**@author shreeram
+ * this method gets the list of the top restaurants from the  method getTopRestaurants() in 
+ * restaurantService firstly, and then it passes to the pushData method in restaurantService 
+ */
   onClickTopRestaurant(){
      this.restaurantService.pushData(this.restaurantService.getTopRestaurants());
   }

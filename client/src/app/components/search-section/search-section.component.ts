@@ -24,10 +24,13 @@ export class SearchSectionComponent implements OnInit {
 
 
 
-
+/**
+ * @author shreeram
+ * FormBuilder and RestaurantService is injected in the class. a form group is initialized 
+ * in order to read the search key from the search form
+ */
   constructor(private formBuilder: FormBuilder, 
     private restaurantService:RestaurantServiceService) {
-    
     
       this.search_key="";
     this.searchForm= formBuilder.group({
@@ -35,9 +38,10 @@ export class SearchSectionComponent implements OnInit {
     });
 
     this.searchForm.statusChanges.subscribe();
-   
   
   }
+
+
 
   ngOnInit() {
     if (window.navigator && window.navigator.geolocation) {
@@ -68,7 +72,7 @@ export class SearchSectionComponent implements OnInit {
   }
 
 
-/**
+/**@author shreeram
  * when the user inputs the name of the restaurant in the search box and clicks the
  * search button then this method is activated. The aim of this method is to search the 
  * resturant object that he wants to search
@@ -89,6 +93,11 @@ export class SearchSectionComponent implements OnInit {
   }
 
 
+  /**@author shreeram
+   * this method returns the collection of the near by restaurants. here the current coordinates
+   * are sent to the getNearRestaurant method of the restaurantService and then subscribed to get
+   * the collection of the restaurants
+   */
   onClickSearchNearBy(){
     var coord= [this.currentLatitude, this.currentLongitude]
     this.restaurantService.getNearRestaurant(coord).subscribe(

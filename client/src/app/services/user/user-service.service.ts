@@ -67,7 +67,7 @@ export class UserServiceService {
 
   }
 
-  /**
+  /**@author shreeram
    * this method is used to assign the value to the class variable currentUser
    * @param value
    */
@@ -76,7 +76,7 @@ export class UserServiceService {
   this.currentUser=value;
  }
 
- /**
+ /**@author shreeram
   * this method emits the class variable, currentUser, using EventEmitter
   */
  getUser(){

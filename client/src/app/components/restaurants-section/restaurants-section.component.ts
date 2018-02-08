@@ -11,14 +11,22 @@ import { RestaurantServiceService } from '../../services/restaurant/restaurant-s
 })
 export class RestaurantsSectionComponent implements OnInit {
 
-  private restaurants ;
+  public restaurants ;
   currentRes;
 
+  /**@author shreeram
+   * DBService and RestaurantService are injected in the class through this constructor.
+   */
   constructor(private dbService :DbServiceService,
     private resturantService: RestaurantServiceService) {
 
   }
 
+
+  /**@author shreeram
+   * the collection of the top restaurants is subscribed and assigned to the class variable
+   * 
+   */
   ngOnInit() {
     // this.restaurants= this.resturantService.getTopRestaurants().subscribe((res) => {
     //   if(res == "err" ) {
@@ -39,6 +47,13 @@ export class RestaurantsSectionComponent implements OnInit {
     //this.restaurants=this.dbService.restaurants;
   }
 
+
+  /**@author shreeram
+   * @argument res - res is the restaurant object
+   * this method accepts the variable res and then it is passed to the pushedData method of 
+   * restaurantService. This method is called when the user clicks the particular restaurant
+   * from the list of the restaurant.
+   */
   onCLick(res){
     // this.resturantService.pushedData.subscribe(data=> this.restaurants= data);
     // this.resturantService.getTopRestaurants();

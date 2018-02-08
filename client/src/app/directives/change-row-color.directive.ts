@@ -12,15 +12,19 @@ export class ChangeRowColorDirective {
     //element.nativeElement.style.backgroundColor="#f4424b";
    }
 
-  //this method changes the background color of the row to #f4424b in the table whenever the mouse gets
-  //over the particular row
+  /**@author shreeram
+   * this method changes the background color of the row to #f4424b in the table whenever the mouse gets
+   *over the particular row
+   */
    @HostListener('mouseover') onmouseover(){
      this.renderer.setElementStyle(this.element.nativeElement,'background','#f4424b');
    }
     
   
-   //this method changes the background color of the row back to the default whenever the 
-   //mouse gets out of the particular row
+   /**@author shreeram
+    * this method changes the background color of the row back to the default whenever the 
+   *mouse gets out of the particular row 
+   */
    @HostListener('mouseout') onmouseout(){
     this.renderer.setElementStyle(this.element.nativeElement,'background','white');
   }

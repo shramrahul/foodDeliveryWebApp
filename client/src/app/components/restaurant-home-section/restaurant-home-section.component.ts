@@ -16,8 +16,8 @@ import {AuthenticationService} from '../../services/authentication.service';
 })
 export class RestaurantHomeSectionComponent implements OnInit {
 
-  private restaurant;
-  private user: any;
+  public restaurant;
+  public user: any;
   cart=[];
   total:number;
   deliveryCharge: number=5;
@@ -25,6 +25,14 @@ export class RestaurantHomeSectionComponent implements OnInit {
   reviewForm: FormGroup;
   currentReview;
 
+
+  /**@author shreeram
+   * this constructor injects the various services as dependency injection. it also initiates
+   * cart as an empty array, assigns 5 to the total, fetches the value o the vallue varaiable in 
+   * restaurant service and assign it in its class variable, restaurant. A dynamic form, reviewForm, is also 
+   * initiated here for the review. initiates an empty object current review
+   * 
+   */
 
   constructor( private restaurantService: RestaurantServiceService,
                private dbService:DbServiceService ,
@@ -60,7 +68,10 @@ export class RestaurantHomeSectionComponent implements OnInit {
 
 
 
-
+/**@author shreeram
+ * this function accepts the collection named food and is assigned to the class variable called
+ * cart. Also the price in the accepted variable is added in the total.
+ */
   addToCart(food){
     console.log("adding in cart"+food)
             setTimeout(() => {
@@ -70,6 +81,11 @@ export class RestaurantHomeSectionComponent implements OnInit {
   }
 
 
+/**@author shreeram
+ * this function accepts an object of food and it is searched in the collection of the cart 
+ * and when it is found then it is removed from the cart. Also the value of the price in the 
+ * object is also reducedfrom the total sum.
+ */
   removeFromCart(f){
     for(var food of this.cart){
       if(f.id==food.id) {
@@ -83,6 +99,12 @@ export class RestaurantHomeSectionComponent implements OnInit {
   }
 
 
+  /**@author shreeram
+   * this method subscribes the pushedData from the restaurant service and assigns it to 
+   * the class variable called restaurants. getRestaurant() method of restaurantService
+   *  is also called here. the currentUser in the userService is also fetched and assigned to its
+   * class variable, user. getTheCurrentSessionOfLoggedUser() is also called from dbService. 
+   */
 
   ngOnInit() {
     this.restaurantService.pushedData.subscribe(data=> this.restaurant=data );
@@ -104,6 +126,10 @@ export class RestaurantHomeSectionComponent implements OnInit {
   }
 
 
+  /**@author shreeram
+   * this method is initiated when the review is submitted. here the form group is transfered to
+   * the currentreview object and pushed to the collection of the total review.
+   */
   onReviewPost(){
 
     this.currentReview.comment= this.reviewForm.value.review;
@@ -119,7 +145,13 @@ export class RestaurantHomeSectionComponent implements OnInit {
 
   }
 
-  onCheckout(){
+  /**@author shreeram
+   * this method is called after checkout buttom is clicked in restaurant Home.
+      the current user is sent to the userService. food_ordered object is created here and 
+      updated in the food_ordered field of user. user is saved in database through userService.save(this.user)
+   */
+  onCheckout(){ 
+    
     console.log("user->>>"+ this.user)
     //console.log("inside checkout")
    this.userService.pushData(this.user);
